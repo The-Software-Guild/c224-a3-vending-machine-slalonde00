@@ -7,7 +7,7 @@ package Services;
 import dao.ClassRosterAuditDao;
 import dao.ClassRosterDao;
 import dao.ClassRosterPersistenceException;
-import dto.Student;
+import dto.Item;
 import java.util.List;
 
 /**
@@ -27,7 +27,7 @@ public class ServiceLayer implements ServiceLayerInterface {
     }
 
     @Override
-    public void createStudent(Student student) throws
+    public void createStudent(Item student) throws
             ClassRosterDuplicateIdException,
             ClassRosterDataValidationException,
             ClassRosterPersistenceException {
@@ -43,13 +43,13 @@ public class ServiceLayer implements ServiceLayerInterface {
                     + " already exists");
         }
 
-        // Now validate all the fields on the given Student object.  
+        // Now validate all the fields on the given Item object.  
         // This method will throw an
         // exception if any of the validation rules are violated.
         validateStudentData(student);
 
         // We passed all our business rules checks so go ahead 
-        // and persist the Student object
+        // and persist the Item object
         dao.addStudent(student, student.getName());
 
         // The student was successfully created, now write to the audit log
@@ -59,30 +59,30 @@ public class ServiceLayer implements ServiceLayerInterface {
     }
 
     @Override
-    public List<Student> getAllStudents() throws ClassRosterPersistenceException {
+    public List<Item> getAllStudents() throws ClassRosterPersistenceException {
         return dao.getAllStudent();
     }
 
     @Override
-    public Student getStudent(String studentId) throws ClassRosterPersistenceException {
+    public Item getStudent(String studentId) throws ClassRosterPersistenceException {
         return dao.findStudent(studentId);
     }
 
     @Override
-    public Student removeStudent(String studentId) throws ClassRosterPersistenceException {
-        Student removedStudent = dao.removeStudent(studentId);
+    public Item removeStudent(String studentId) throws ClassRosterPersistenceException {
+        Item removedStudent = dao.removeStudent(studentId);
         // Write to audit log
         auditDao.writeAuditEntry("Student " + studentId + " REMOVED.");
         return removedStudent;
     }
 
-    public Student editStudent(String studentId) throws ClassRosterPersistenceException {
-        Student someStudent = dao.findStudent(studentId);
+    public Item editStudent(String studentId) throws ClassRosterPersistenceException {
+        Item someStudent = dao.findStudent(studentId);
         dao.editStudent(someStudent, studentId);
         return someStudent;
     }
 
-    private void validateStudentData(Student student) throws
+    private void validateStudentData(Item student) throws
             ClassRosterDataValidationException {
 
         if (student.getName() == null

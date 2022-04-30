@@ -10,13 +10,13 @@ import java.util.Objects;
  *
  * @author slalo
  */
-public class Student {
+public class Item {
 
     private String grade = "";
     private String name = "";
     private String id = "";
 
-    public Student(String studentId) {
+    public Item(String studentId) {
         this.name=studentId;
     }
 
@@ -44,7 +44,7 @@ public class Student {
         this.id = id;
     }
 
-    public Student(String name, String grade, String id) {
+    public Item(String name, String grade, String id) {
         this.grade = grade;
         this.name = name;
         this.id = id;
@@ -68,7 +68,7 @@ public class Student {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Student other = (Student) obj;
+        final Item other = (Item) obj;
         if (!Objects.equals(this.grade, other.grade)) {
             return false;
         }

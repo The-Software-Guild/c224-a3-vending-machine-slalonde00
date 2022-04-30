@@ -4,7 +4,7 @@
  */
 package dao;
 
-import dto.Student;
+import dto.Item;
 import java.io.FileWriter;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -50,7 +50,7 @@ public class ClassRosterDaoFileImplTest {
     public void testAddGetStudent() throws Exception {
         // Create our method test inputs
         String studentId = "0001";
-        Student student = new Student(studentId);
+        Item student = new Item(studentId);
         student.setName("Ada");
         student.setGrade("100");
         student.setId("Java-May-1845");
@@ -58,7 +58,7 @@ public class ClassRosterDaoFileImplTest {
         //  Add the student to the DAO
         testDao.addStudent(student, studentId);
         // Get the student from the DAO
-        Student retrievedStudent = testDao.findStudent(studentId);
+        Item retrievedStudent = testDao.findStudent(studentId);
 
         // Check the data is equal
         assertEquals(student.getName(),
@@ -75,13 +75,13 @@ public class ClassRosterDaoFileImplTest {
     @Test
     public void testAddGetAllStudents() throws Exception {
         // Create our first student
-        Student firstStudent = new Student("0001");
+        Item firstStudent = new Item("0001");
         firstStudent.setName("Ada");
         firstStudent.setGrade("Lovelace");
         firstStudent.setId("Java-May-1845");
 
         // Create our second student
-        Student secondStudent = new Student("0002");
+        Item secondStudent = new Item("0002");
         secondStudent.setName("Charles");
         secondStudent.setGrade("Babbage");
         secondStudent.setId(".NET-May-1845");
@@ -91,7 +91,7 @@ public class ClassRosterDaoFileImplTest {
         testDao.addStudent(secondStudent, secondStudent.getName());
 
         // Retrieve the list of all students within the DAO
-        List<Student> allStudents = testDao.getAllStudent();
+        List<Item> allStudents = testDao.getAllStudent();
 
         // First check the general contents of the list
         assertNotNull(allStudents, "The list of students must not null");
@@ -108,12 +108,12 @@ public class ClassRosterDaoFileImplTest {
     @Test
     public void testRemoveStudent() throws Exception {
         // Create two new students
-        Student firstStudent = new Student("0001");
+        Item firstStudent = new Item("0001");
         firstStudent.setName("Ada");
         firstStudent.setGrade("Lovelace");
         firstStudent.setId("Java-May-1945");
 
-        Student secondStudent = new Student("0002");
+        Item secondStudent = new Item("0002");
         secondStudent.setName("Charles");
         secondStudent.setGrade("Babbage");
         secondStudent.setId(".NET-May-1945");
@@ -123,13 +123,13 @@ public class ClassRosterDaoFileImplTest {
         testDao.addStudent(secondStudent, secondStudent.getName());
 
         // remove the first student - Ada
-        Student removedStudent = testDao.removeStudent(firstStudent.getName());
+        Item removedStudent = testDao.removeStudent(firstStudent.getName());
 
         // Check that the correct object was removed.
         assertEquals(removedStudent, firstStudent, "The removed student should be Ada.");
 
         // Get all the students
-        List<Student> allStudents = testDao.getAllStudent();
+        List<Item> allStudents = testDao.getAllStudent();
 
         // First check the general contents of the list
         assertNotNull(allStudents, "All students list should be not null.");
@@ -151,7 +151,7 @@ public class ClassRosterDaoFileImplTest {
         assertTrue(allStudents.isEmpty(), "The retrieved list of students should be empty.");
 
         // Try to 'get' both students by their old id - they should be null!
-        Student retrievedStudent = testDao.findStudent(firstStudent.getName());
+        Item retrievedStudent = testDao.findStudent(firstStudent.getName());
         assertNull(retrievedStudent, "Ada was removed, should be null.");
 
         retrievedStudent = testDao.findStudent(secondStudent.getName());

@@ -10,7 +10,7 @@ import Services.ServiceLayer;
 import dao.ClassRosterDao;
 import dao.ClassRosterPersistenceException;
 import views.ClassRosterView;
-import dto.Student;
+import dto.Item;
 import java.util.List;
 /**
  *
@@ -77,7 +77,7 @@ private void createStudent() throws ClassRosterPersistenceException {
    
     boolean hasErrors = false;
     do {
-        Student currentStudent = view.getNewStudentInfo();
+        Item currentStudent = view.getNewStudentInfo();
         try {
             services.createStudent(currentStudent);
       
@@ -90,14 +90,14 @@ private void createStudent() throws ClassRosterPersistenceException {
 }
 
 private void listStudents() throws ClassRosterPersistenceException {
-    List<Student> studentList = services.getAllStudents();
+    List<Item> studentList = services.getAllStudents();
     view.displayStudentList(studentList);
 }
 
 private void viewStudent() throws ClassRosterPersistenceException {
     
     String studentId = view.getStudentMenu();
-    Student student = services.getStudent(studentId);
+    Item student = services.getStudent(studentId);
     view.listStudent(student);
 }
 
@@ -112,21 +112,21 @@ private void removeStudent() throws ClassRosterPersistenceException {
     }
 
     private void listStudent() throws ClassRosterPersistenceException {
-        List<Student> someStudent = services.getAllStudents();
+        List<Item> someStudent = services.getAllStudents();
         view.listAllStudent(someStudent);
        
     }
 
     private void getStudent() throws ClassRosterPersistenceException {
         String name = view.getStudentMenu();
-        Student foundStudent = services.getStudent(name);
+        Item foundStudent = services.getStudent(name);
         view.listStudent(foundStudent);
       }
 
     private void editStudent() throws ClassRosterPersistenceException {
         String name = view.editStudentMenu();
-        Student studentToEdit = services.getStudent(name);
-        Student updatedStudent = view.editStudent(studentToEdit);
+        Item studentToEdit = services.getStudent(name);
+        Item updatedStudent = view.editStudent(studentToEdit);
         services.editStudent(name);
         view.listStudent(updatedStudent);
     }

@@ -5,7 +5,7 @@
 package views;
 
 import dao.ClassRosterPersistenceException;
-import dto.Student;
+import dto.Item;
 import java.util.List;
 
 /**
@@ -33,12 +33,12 @@ public class ClassRosterView {
         return io.readInt("Please Select one of the above option", 1, 6);
     }
 
-    public Student addStudentMenu() {
+    public Item addStudentMenu() {
         io.print("Add student");
         String grade = io.readString("Please enter grade");
         String name = io.readString("Please enter name");
         String id = io.readString("Please enter id");
-        Student newStudent = new Student(grade, name, id);
+        Item newStudent = new Item(grade, name, id);
         return newStudent;
     }
 
@@ -53,7 +53,7 @@ public class ClassRosterView {
         return io.readString("Please enter the name of the student you wish to edit");
     }
 
-    public Student editStudent(Student someStudent) {
+    public Item editStudent(Item someStudent) {
         String name = io.readString("Enter a name");
         if (!name.equals("")) {
             someStudent.setName(name);
@@ -72,15 +72,15 @@ public class ClassRosterView {
         return someStudent;
     }
 
-    public void listStudent(Student someStudent) {
+    public void listStudent(Item someStudent) {
         io.print("Name : " + someStudent.getName());
         io.print("Grade : " + someStudent.getGrade());
         io.print("id : " + someStudent.getId());
 
     }
 
-    public void listAllStudent(List<Student> someStudent) {
-        for (Student newStudent : someStudent) {
+    public void listAllStudent(List<Item> someStudent) {
+        for (Item newStudent : someStudent) {
             io.print(newStudent.getName());
             io.print("");
         }
@@ -98,12 +98,12 @@ public class ClassRosterView {
         io.print(errorMsg);
     }
 
-    public Student getNewStudentInfo() {
+    public Item getNewStudentInfo() {
         String Name = io.readString("Please enter Student Name");
         String Grade = io.readString("Please enter Student Grade");
         String Id = io.readString("Please enter Student Id");
 
-        Student currentStudent = new Student(Name);
+        Item currentStudent = new Item(Name);
         currentStudent.setName(Name);
         currentStudent.setGrade(Grade);
         currentStudent.setId(Id);
@@ -114,8 +114,8 @@ public class ClassRosterView {
         return io;
     }
 
-    public void displayStudentList(List<Student> studentList) {
-        for (Student currentStudent : studentList) {
+    public void displayStudentList(List<Item> studentList) {
+        for (Item currentStudent : studentList) {
             String studentInfo = String.format("#%s : %s %s",
                     currentStudent.getName(),
                     currentStudent.getGrade(),

@@ -4,7 +4,7 @@
  */
 package dao;
 
-import dto.Student;
+import dto.Item;
 import java.util.List;
 
 /**
@@ -12,13 +12,13 @@ import java.util.List;
  * @author slalo
  */
 public interface ClassRosterDao {
-    Student addStudent(Student someStudent, String name) throws ClassRosterPersistenceException;
+    Item addStudent(Item someStudent, String name) throws ClassRosterPersistenceException;
     
-    Student removeStudent(String name) throws ClassRosterPersistenceException;
+    Item removeStudent(String name) throws ClassRosterPersistenceException;
     
-    Student editStudent(Student someStudent, String name) throws ClassRosterPersistenceException;
+    Item editStudent(Item someStudent, String name) throws ClassRosterPersistenceException;
     
-    List<Student> getAllStudent()throws ClassRosterPersistenceException;
+    List<Item> getAllStudent()throws ClassRosterPersistenceException;
     
-    Student findStudent(String adress) throws ClassRosterPersistenceException;
+    Item findStudent(String adress) throws ClassRosterPersistenceException;
 }
