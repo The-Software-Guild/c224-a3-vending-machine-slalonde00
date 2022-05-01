@@ -25,6 +25,11 @@ public class ServiceLayer implements ServiceLayerInterface {
         this.dao = dao;
         this.auditDao = auditDao;
     }
+    
+    public ServiceLayer(ClassRosterDao dao) {
+        this.dao = dao;
+       
+    }
 
     @Override
     public void createStudent(Item student) throws
@@ -36,7 +41,7 @@ public class ServiceLayer implements ServiceLayerInterface {
         // associated with the given student's id
         // If so, we're all done here - 
         // throw a ClassRosterDuplicateIdException
-        if (dao.findStudent(student.getName()) != null) {
+        if (dao.findStudent(Integer.parseInt(student.getName())) != null) {
             throw new ClassRosterDuplicateIdException(
                     "ERROR: Could not create student.  Student Id "
                     + student.getName()
@@ -64,8 +69,8 @@ public class ServiceLayer implements ServiceLayerInterface {
     }
 
     @Override
-    public Item getStudent(String studentId) throws ClassRosterPersistenceException {
-        return dao.findStudent(studentId);
+    public Item getStudent(int studentId) throws ClassRosterPersistenceException {
+        return dao.findStudent((studentId));
     }
 
     @Override
@@ -76,8 +81,8 @@ public class ServiceLayer implements ServiceLayerInterface {
         return removedStudent;
     }
 
-    public Item editStudent(String studentId) throws ClassRosterPersistenceException {
-        Item someStudent = dao.findStudent(studentId);
+    public Item editStudent(int studentId) throws ClassRosterPersistenceException {
+        Item someStudent = dao.findStudent(((studentId)));
         dao.editStudent(someStudent, studentId);
         return someStudent;
     }
@@ -87,8 +92,8 @@ public class ServiceLayer implements ServiceLayerInterface {
 
         if (student.getName() == null
                 || student.getName().trim().length() == 0
-                || student.getGrade().trim().length() == 0
-                || student.getId().trim().length() == 0) {
+                || student.getCost() == 0
+                || student.getInStock() == 0) {
             throw new ClassRosterDataValidationException(
                     "ERROR: All fields [First Name, Last Name, Cohort] are required.");
         }

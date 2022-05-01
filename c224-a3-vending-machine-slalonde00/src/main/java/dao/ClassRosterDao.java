@@ -14,11 +14,11 @@ import java.util.List;
 public interface ClassRosterDao {
     Item addStudent(Item someStudent, String name) throws ClassRosterPersistenceException;
     
-    Item removeStudent(String name) throws ClassRosterPersistenceException;
+    Item removeStudent(String id) throws ClassRosterPersistenceException;
     
-    Item editStudent(Item someStudent, String name) throws ClassRosterPersistenceException;
+    Item editStudent(Item someStudent, int id) throws ClassRosterPersistenceException;
     
     List<Item> getAllStudent()throws ClassRosterPersistenceException;
     
-    Item findStudent(String adress) throws ClassRosterPersistenceException;
+    Item findStudent(int address) throws ClassRosterPersistenceException;
 }

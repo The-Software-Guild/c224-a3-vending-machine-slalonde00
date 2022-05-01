@@ -1,11 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package views;
 
+import Services.ServiceLayer;
+import dao.ClassRosterDaoFileImpl;
 import dao.ClassRosterPersistenceException;
 import dto.Item;
+import java.text.DecimalFormat;
 import java.util.List;
 
 /**
@@ -15,28 +15,27 @@ import java.util.List;
 public class ClassRosterView {
 
     private final UserIO io;
+    private final ClassRosterDaoFileImpl dao = new ClassRosterDaoFileImpl();
+    private final ServiceLayer services = new ServiceLayer(dao);
+    private final DecimalFormat df = new DecimalFormat("#.00");
 
     public ClassRosterView(UserIO io) {
         this.io = io;
     }
 
-    public int initialMenu() throws ClassRosterPersistenceException {
+    public int initialMenu() throws ClassRosterPersistenceException, Exception {
 
         io.print("Initial Menu");
-        io.print("please select the operation you wish to perform");
-        io.print("1. Add student");
-        io.print("2. Delete atudent");
-        io.print("3. Edit student");
-        io.print("4. List all student");
-        io.print("5. List a student info");
+        io.print("please select the produit you wish to buy");
+        displayStudentList(services.getAllStudents());
         io.print("6. Exit");
         return io.readInt("Please Select one of the above option", 1, 6);
     }
 
-    public Item addStudentMenu() {
+    public Item addStudentMenu() throws ClassRosterPersistenceException {
         io.print("Add student");
         String grade = io.readString("Please enter grade");
-        String name = io.readString("Please enter name");
+        Double name = io.readDouble("Please enter name");
         String id = io.readString("Please enter id");
         Item newStudent = new Item(grade, name, id);
         return newStudent;
@@ -48,39 +47,34 @@ public class ClassRosterView {
         return name;
     }
 
-    public String editStudentMenu() {
-        io.print("Edit student");
-        return io.readString("Please enter the name of the student you wish to edit");
+    public int editStudentMenu() throws ClassRosterPersistenceException {
+        io.print("Buying a product ?");
+        return io.readInt("Please enter the 0 t0 confirm your purchase");
     }
 
-    public Item editStudent(Item someStudent) {
-        String name = io.readString("Enter a name");
-        if (!name.equals("")) {
-            someStudent.setName(name);
-        }
+    public Item editStudent(Item someStudent) throws ClassRosterPersistenceException {
 
-        String grade = io.readString("Enter a grade");
-        if (!grade.equals("")) {
-            someStudent.setGrade(grade);
-        }
+        int id = io.readInt("How many do you wanna buy ?");
+        
+            someStudent.setInStock(someStudent.getInStock()-id);
+        
 
-        String id = io.readString("Enter an id");
-        if (!id.equals("")) {
-            someStudent.setId(id);
-        }
-
+        io.readString("Thank you for your purchase");
+        System.out.println(someStudent.getInStock()-id);
         return someStudent;
     }
 
     public void listStudent(Item someStudent) {
         io.print("Name : " + someStudent.getName());
-        io.print("Grade : " + someStudent.getGrade());
-        io.print("id : " + someStudent.getId());
+        io.print("Cost : " + someStudent.getCost());
+        io.print("in stock : " + someStudent.getInStock());
 
     }
 
     public void listAllStudent(List<Item> someStudent) {
         for (Item newStudent : someStudent) {
+            io.print(newStudent.getName());
+            io.print(df.format(newStudent.getCost()));
             io.print(newStudent.getName());
             io.print("");
         }
@@ -98,15 +92,15 @@ public class ClassRosterView {
         io.print(errorMsg);
     }
 
-    public Item getNewStudentInfo() {
-        String Name = io.readString("Please enter Student Name");
-        String Grade = io.readString("Please enter Student Grade");
-        String Id = io.readString("Please enter Student Id");
+    public Item getNewStudentInfo() throws ClassRosterPersistenceException {
+        String Name = io.readString("Please enter an item Name");
+        Double Grade = io.readDouble("Please enter a price");
+        int Id = io.readInt("Please enter how much item to stock up on");
 
         Item currentStudent = new Item(Name);
         currentStudent.setName(Name);
-        currentStudent.setGrade(Grade);
-        currentStudent.setId(Id);
+        currentStudent.setCost(Grade);
+        currentStudent.setInStock(Id);
         return currentStudent;
     }
 
@@ -115,13 +109,14 @@ public class ClassRosterView {
     }
 
     public void displayStudentList(List<Item> studentList) {
+        int i = 1;
         for (Item currentStudent : studentList) {
-            String studentInfo = String.format("#%s : %s %s",
+            String studentInfo = String.format("#%s : %s %s", i + ". ",
                     currentStudent.getName(),
-                    currentStudent.getGrade(),
-                    currentStudent.getId());
+                    currentStudent.getCost() + "$",
+                    currentStudent.getInStock());
             io.print(studentInfo);
         }
-        io.readString("Please hit enter to continue.");
+
     }
 }

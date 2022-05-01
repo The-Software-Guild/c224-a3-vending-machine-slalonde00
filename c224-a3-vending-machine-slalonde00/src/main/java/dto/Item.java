@@ -4,6 +4,7 @@
  */
 package dto;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -12,20 +13,29 @@ import java.util.Objects;
  */
 public class Item {
 
-    private String grade = "";
+    private double cost;
     private String name = "";
-    private String id = "";
+    private int inStock;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public Item(String studentId) {
-        this.name=studentId;
+        this.name = studentId;
     }
 
-    public String getGrade() {
-        return grade;
+    public double getCost() {
+        return cost;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 
     public String getName() {
@@ -36,18 +46,18 @@ public class Item {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public int getInStock() {
+        return inStock;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
     }
 
-    public Item(String name, String grade, String id) {
-        this.grade = grade;
+    public Item(String name, double grade, int id) {
+        this.cost = grade;
         this.name = name;
-        this.id = id;
+        this.inStock = id;
 
     }
 
@@ -69,18 +79,18 @@ public class Item {
             return false;
         }
         final Item other = (Item) obj;
-        if (!Objects.equals(this.grade, other.grade)) {
+        if (!Objects.equals(this.cost, other.cost)) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(this.inStock, other.inStock);
     }
 
     @Override
     public String toString() {
-        return "Student{" + "Name= " + name + "  Grade = " + grade + ", id=" + id + '}';
+        return "Student{" + "Name= " + name + "  Grade = " + cost + ", id=" + inStock + '}';
     }
 
 }

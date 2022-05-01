@@ -28,7 +28,7 @@ public class UserIOConsoleImpl implements UserIO {
         ans = 0;
         try {
 
-            ans = Integer.parseInt(sc.nextLine());
+            ans = sc.nextInt();
         } catch (NumberFormatException e) {
             throw new ClassRosterPersistenceException("Integer was not entered");
 
@@ -53,8 +53,9 @@ public class UserIOConsoleImpl implements UserIO {
                 break;
             }
             System.out.println("Please enter an Integer between " + min + " and " + max);
-
+            
         }
+        max++;
         return ans;
     }
 

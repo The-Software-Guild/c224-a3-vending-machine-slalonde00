@@ -7,7 +7,6 @@ package controller;
 import Services.ClassRosterDataValidationException;
 import Services.ClassRosterDuplicateIdException;
 import Services.ServiceLayer;
-import dao.ClassRosterDao;
 import dao.ClassRosterPersistenceException;
 import views.ClassRosterView;
 import dto.Item;
@@ -29,26 +28,20 @@ public class ClassRosterController {
         this.services=services;
     }
 
-    public void run() throws ClassRosterPersistenceException {
+    public void run() throws ClassRosterPersistenceException, Exception {
         boolean keepgoing = true;
         int menuSelect = 0;
         while (keepgoing) {
             menuSelect = getMenuSelect();
             switch (menuSelect) {
                 case 1:
-                    createStudent();
+                    editStudent();
                     break;
                 case 2:
-                    removeStudent();
+                    editStudent();
                     break;
                 case 3:
                     editStudent();
-                    break;
-                case 4:
-                    listStudent();
-                    break;
-                case 5:
-                    getStudent();
                     break;
                 case 6:
                     keepgoing = false;
@@ -97,7 +90,7 @@ private void listStudents() throws ClassRosterPersistenceException {
 private void viewStudent() throws ClassRosterPersistenceException {
     
     String studentId = view.getStudentMenu();
-    Item student = services.getStudent(studentId);
+    Item student = services.getStudent((studentId));
     view.listStudent(student);
 }
 
@@ -107,7 +100,7 @@ private void removeStudent() throws ClassRosterPersistenceException {
     services.removeStudent(studentId);
 }
 
-    private int getMenuSelect() throws ClassRosterPersistenceException {
+    private int getMenuSelect() throws ClassRosterPersistenceException, Exception {
     return view.initialMenu();
     }
 
@@ -119,12 +112,12 @@ private void removeStudent() throws ClassRosterPersistenceException {
 
     private void getStudent() throws ClassRosterPersistenceException {
         String name = view.getStudentMenu();
-        Item foundStudent = services.getStudent(name);
+        Item foundStudent = services.getStudent((name));
         view.listStudent(foundStudent);
       }
 
     private void editStudent() throws ClassRosterPersistenceException {
-        String name = view.editStudentMenu();
+        int name = view.editStudentMenu();
         Item studentToEdit = services.getStudent(name);
         Item updatedStudent = view.editStudent(studentToEdit);
         services.editStudent(name);

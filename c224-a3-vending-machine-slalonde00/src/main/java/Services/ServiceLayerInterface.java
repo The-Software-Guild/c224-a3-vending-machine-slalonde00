@@ -22,7 +22,7 @@ public interface ServiceLayerInterface {
 
     List<Item> getAllStudents() throws ClassRosterPersistenceException;
 
-    Item getStudent(String studentId) throws
+    Item getStudent(int studentId) throws
             ClassRosterPersistenceException;
 
     Item removeStudent(String studentId) throws

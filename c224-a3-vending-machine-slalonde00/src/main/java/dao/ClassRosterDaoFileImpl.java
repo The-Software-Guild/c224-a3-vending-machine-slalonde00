@@ -18,7 +18,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
 
     private final String studentFile;
     public static final String delemiter = "::";
-    private Map<String, Item> someStudent = new HashMap<String, Item>();
+    private List<Item> someStudent = new ArrayList<Item>();
 
     public ClassRosterDaoFileImpl() {
         studentFile = "students.txt";
@@ -37,33 +37,38 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         } catch (Exception ex) {
 
         }
-        someStudent.put(name, newStudent);
+        someStudent.add(newStudent);
         writeStudent();
         return newStudent;
     }
 
     @Override
-    public Item removeStudent(String name) throws ClassRosterPersistenceException {
+    public Item removeStudent(String id) throws ClassRosterPersistenceException {
         try {
             loadStudent();
         } catch (FileNotFoundException ex) {
         } catch (Exception ex) {
         }
-        Item removedStudent = someStudent.remove(name);
+
+        Item removedStudent = someStudent.get(Integer.parseInt(id));
+        someStudent.remove(id);
         writeStudent();
         return removedStudent;
     }
 
     @Override
-    public Item editStudent(Item editedStudent, String name) throws ClassRosterPersistenceException {
+    public Item editStudent(Item oldStudent, int id) throws ClassRosterPersistenceException {
         try {
             loadStudent();
         } catch (FileNotFoundException ex) {
         } catch (Exception ex) {
         }
-        someStudent.remove(name);
-        Item newStudent = someStudent.put(editedStudent.getName(), editedStudent);
+        someStudent.remove(oldStudent);
+        Item newStudent = new Item(someStudent.get(id).getName(), someStudent.get(id).getCost(), someStudent.get(id).getInStock());
+        someStudent.add(newStudent);
+        writeStudent();
         return newStudent;
+
     }
 
     @Override
@@ -74,21 +79,21 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
 
         } catch (Exception ex) {
         }
-        return new ArrayList(someStudent.values());
+        return new ArrayList(someStudent);
     }
 
     @Override
-    public Item findStudent(String adress) throws ClassRosterPersistenceException {
+    public Item findStudent(int address) throws ClassRosterPersistenceException {
         try {
             loadStudent();
         } catch (FileNotFoundException ex) {
         } catch (Exception ex) {
 
         }
-        return someStudent.get(adress);
+        return someStudent.get((address));
     }
 
-    private void writeStudent()
+    public void writeStudent()
             throws ClassRosterPersistenceException {
 
         PrintWriter out;
@@ -114,7 +119,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
 
     }
 
-    private void loadStudent() throws ClassRosterPersistenceException, FileNotFoundException, Exception {
+    public void loadStudent() throws ClassRosterPersistenceException, FileNotFoundException, Exception {
         Scanner s;
         try {
             s = new Scanner(new BufferedReader(new FileReader(studentFile)));
@@ -125,16 +130,16 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         while (s.hasNextLine()) {
             String currentLine = s.nextLine();
             Item currentStudent = unMarshallStudents(currentLine);
-            someStudent.put(currentStudent.getName(), currentStudent);
+            someStudent.add(currentStudent);
         }
         s.close();
 
     }
 
     private String marshallStudents(Item someStudent) {
-        String studentAsString = someStudent.getGrade() + delemiter;
+        String studentAsString = someStudent.getCost() + delemiter;
         studentAsString += someStudent.getName() + "::";
-        studentAsString += someStudent.getId() + "::";
+        studentAsString += someStudent.getInStock() + "::";
         return studentAsString;
     }
 
@@ -144,16 +149,16 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         String grade = studentInfo[1];
         String id = studentInfo[2];
 
-        Item newStudent = new Item(name, grade, id);
+        Item newStudent = new Item(name, Double.parseDouble(grade), Integer.parseInt(id));
         return newStudent;
 
     }
 
-    public Map<String, Item> getSomeStudent() {
+    public List<Item> getSomeStudent() {
         return someStudent;
     }
 
-    public void setSomeStudent(Map<String, Item> someStudent) {
+    public void setSomeStudent(List<Item> someStudent) {
         this.someStudent = someStudent;
     }
 

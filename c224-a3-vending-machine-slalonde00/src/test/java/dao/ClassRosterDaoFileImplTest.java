@@ -52,8 +52,8 @@ public class ClassRosterDaoFileImplTest {
         String studentId = "0001";
         Item student = new Item(studentId);
         student.setName("Ada");
-        student.setGrade("100");
-        student.setId("Java-May-1845");
+        student.setCost("100");
+        student.setInStock("Java-May-1845");
 
         //  Add the student to the DAO
         testDao.addStudent(student, studentId);
@@ -64,11 +64,11 @@ public class ClassRosterDaoFileImplTest {
         assertEquals(student.getName(),
                 retrievedStudent.getName(),
                 "Checking student name.");
-        assertEquals(student.getGrade(),
-                retrievedStudent.getGrade(),
+        assertEquals(student.getCost(),
+                retrievedStudent.getCost(),
                 "Checking student first grade.");
-        assertEquals(student.getId(),
-                retrievedStudent.getId(),
+        assertEquals(student.getInStock(),
+                retrievedStudent.getInStock(),
                 "Checking student id.");
     }
 
@@ -77,14 +77,14 @@ public class ClassRosterDaoFileImplTest {
         // Create our first student
         Item firstStudent = new Item("0001");
         firstStudent.setName("Ada");
-        firstStudent.setGrade("Lovelace");
-        firstStudent.setId("Java-May-1845");
+        firstStudent.setCost("Lovelace");
+        firstStudent.setInStock("Java-May-1845");
 
         // Create our second student
         Item secondStudent = new Item("0002");
         secondStudent.setName("Charles");
-        secondStudent.setGrade("Babbage");
-        secondStudent.setId(".NET-May-1845");
+        secondStudent.setCost("Babbage");
+        secondStudent.setInStock(".NET-May-1845");
 
         // Add both our students to the DAO
         testDao.addStudent(firstStudent, firstStudent.getName());
@@ -110,13 +110,13 @@ public class ClassRosterDaoFileImplTest {
         // Create two new students
         Item firstStudent = new Item("0001");
         firstStudent.setName("Ada");
-        firstStudent.setGrade("Lovelace");
-        firstStudent.setId("Java-May-1945");
+        firstStudent.setCost("Lovelace");
+        firstStudent.setInStock("Java-May-1945");
 
         Item secondStudent = new Item("0002");
         secondStudent.setName("Charles");
-        secondStudent.setGrade("Babbage");
-        secondStudent.setId(".NET-May-1945");
+        secondStudent.setCost("Babbage");
+        secondStudent.setInStock(".NET-May-1945");
 
         // Add both to the DAO
         testDao.addStudent(firstStudent, firstStudent.getName());

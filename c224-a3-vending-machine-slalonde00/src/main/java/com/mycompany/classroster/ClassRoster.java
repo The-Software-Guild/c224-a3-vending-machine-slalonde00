@@ -22,7 +22,7 @@ import views.UserIOConsoleImpl;
  */
 public class ClassRoster {
 
-   public static void main(String[] args) throws ClassRosterPersistenceException {
+   public static void main(String[] args) throws ClassRosterPersistenceException, Exception {
     // Instantiate the UserIO implementation
     UserIO myIo = new UserIOConsoleImpl();
     // Instantiate the View and wire the UserIO implementation into it
