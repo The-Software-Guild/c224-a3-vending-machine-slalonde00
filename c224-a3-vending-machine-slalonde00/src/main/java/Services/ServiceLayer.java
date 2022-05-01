@@ -92,7 +92,7 @@ public class ServiceLayer implements ServiceLayerInterface {
 
         if (student.getName() == null
                 || student.getName().trim().length() == 0
-                || student.getCost() == 0
+                || student.getCost() == null
                 || student.getInStock() == 0) {
             throw new ClassRosterDataValidationException(
                     "ERROR: All fields [First Name, Last Name, Cohort] are required.");

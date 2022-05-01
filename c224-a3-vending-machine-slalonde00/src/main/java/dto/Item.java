@@ -13,7 +13,7 @@ import java.util.Objects;
  */
 public class Item {
 
-    private double cost;
+    private BigDecimal cost;
     private String name = "";
     private int inStock;
     private String id;
@@ -30,11 +30,11 @@ public class Item {
         this.name = studentId;
     }
 
-    public double getCost() {
+    public BigDecimal getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(BigDecimal cost) {
         this.cost = cost;
     }
 
@@ -54,7 +54,7 @@ public class Item {
         this.inStock = inStock;
     }
 
-    public Item(String name, double grade, int id) {
+    public Item(String name, BigDecimal grade, int id) {
         this.cost = grade;
         this.name = name;
         this.inStock = id;

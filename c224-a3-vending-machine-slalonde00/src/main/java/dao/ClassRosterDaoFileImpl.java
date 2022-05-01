@@ -7,6 +7,7 @@ package dao;
 import dto.Item;
 import java.util.*;
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -90,7 +91,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         } catch (Exception ex) {
 
         }
-        return someStudent.get((address));
+        return someStudent.get(address);
     }
 
     public void writeStudent()
@@ -149,7 +150,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         String grade = studentInfo[1];
         String id = studentInfo[2];
 
-        Item newStudent = new Item(name, Double.parseDouble(grade), Integer.parseInt(id));
+        Item newStudent = new Item(name, BigDecimal.valueOf(Double.parseDouble(grade)), Integer.parseInt(id));
         return newStudent;
 
     }

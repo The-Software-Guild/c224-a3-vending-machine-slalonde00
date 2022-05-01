@@ -1,10 +1,10 @@
-
 package views;
 
 import Services.ServiceLayer;
 import dao.ClassRosterDaoFileImpl;
 import dao.ClassRosterPersistenceException;
 import dto.Item;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.List;
 
@@ -35,8 +35,8 @@ public class ClassRosterView {
     public Item addStudentMenu() throws ClassRosterPersistenceException {
         io.print("Add student");
         String grade = io.readString("Please enter grade");
-        Double name = io.readDouble("Please enter name");
-        String id = io.readString("Please enter id");
+        BigDecimal name = io.readBigDecimal("Please enter name");
+        int id = io.readInt("Please enter id");
         Item newStudent = new Item(grade, name, id);
         return newStudent;
     }
@@ -48,19 +48,21 @@ public class ClassRosterView {
     }
 
     public int editStudentMenu() throws ClassRosterPersistenceException {
+        int i = 0;
         io.print("Buying a product ?");
-        return io.readInt("Please enter the 0 t0 confirm your purchase");
+        int selector = io.readInt("Press " + i + " to confirm your purchase");
+        i++;
+        return selector;
     }
 
     public Item editStudent(Item someStudent) throws ClassRosterPersistenceException {
 
         int id = io.readInt("How many do you wanna buy ?");
-        
-            someStudent.setInStock(someStudent.getInStock()-id);
-        
+
+        someStudent.setInStock(someStudent.getInStock() - id);
 
         io.readString("Thank you for your purchase");
-        System.out.println(someStudent.getInStock()-id);
+        System.out.println(someStudent.getInStock() - id);
         return someStudent;
     }
 
@@ -94,7 +96,7 @@ public class ClassRosterView {
 
     public Item getNewStudentInfo() throws ClassRosterPersistenceException {
         String Name = io.readString("Please enter an item Name");
-        Double Grade = io.readDouble("Please enter a price");
+        BigDecimal Grade = io.readBigDecimal("Please enter a price");
         int Id = io.readInt("Please enter how much item to stock up on");
 
         Item currentStudent = new Item(Name);

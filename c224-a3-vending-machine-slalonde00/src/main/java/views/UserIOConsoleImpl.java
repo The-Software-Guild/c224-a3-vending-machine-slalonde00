@@ -5,6 +5,7 @@
 package views;
 
 import dao.ClassRosterPersistenceException;
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 /**
@@ -100,4 +101,9 @@ public class UserIOConsoleImpl implements UserIO {
         return Long.parseLong(prompt);
     }
 
+    
+    @Override
+    public BigDecimal readBigDecimal(String prompt) {
+        return BigDecimal.valueOf(Double.parseDouble(prompt));
+    }
 }
