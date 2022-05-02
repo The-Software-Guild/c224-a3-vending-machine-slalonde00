@@ -5,9 +5,11 @@
 package Services;
 
 import Services.ServiceLayerException;
-import dto.Student;
+import dto.Item;
 import dao.ClassRosterPersistenceException;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -15,17 +17,21 @@ import java.util.List;
  */
 public interface ServiceLayerInterface {
 
-    void createStudent(Student student) throws
+    void createItem(Item student) throws
             ClassRosterDuplicateIdException,
             ClassRosterDataValidationException,
             ClassRosterPersistenceException;
 
-    List<Student> getAllStudents() throws ClassRosterPersistenceException;
+    List<Item> getAllItems() throws ClassRosterPersistenceException;
 
-    Student getStudent(String studentId) throws
+    Item getItem(String studentId) throws
             ClassRosterPersistenceException;
 
-    Student removeStudent(String studentId) throws
+    Item removeItem(String studentId) throws
             ClassRosterPersistenceException;
 
+   List<Item> updateAllItems() throws ClassRosterPersistenceException;
+
+   List<Item> getMap();
+   
 }

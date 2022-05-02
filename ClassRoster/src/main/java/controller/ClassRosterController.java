@@ -10,7 +10,9 @@ import Services.ServiceLayer;
 import dao.ClassRosterDao;
 import dao.ClassRosterPersistenceException;
 import views.ClassRosterView;
-import dto.Student;
+import dto.Item;
+import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,22 +32,22 @@ public class ClassRosterController {
         this.services = services;
     }
 
-    public void run() throws ClassRosterPersistenceException {
+    public void run() throws ClassRosterPersistenceException, FileNotFoundException {
         boolean keepgoing = true;
         int menuSelect = 0;
         int i = 0;
         while (keepgoing) {
 
-            menuSelect = getMenuSelect(services.getAllStudents(), i);
+            menuSelect = getMenuSelect(services.getAllItems(), i);
             switch (menuSelect) {
                 case 0:
-                    editStudent();
+                    editItem();
                     break;
                 case 1:
-                    listStudent();
+                    listItem();
                     break;
                 case 2:
-                    getStudent();
+                    getItem();
                     break;
                 case 3:
                     keepgoing = false;
@@ -71,13 +73,13 @@ public class ClassRosterController {
         this.view = view;
     }
 
-    private void createStudent() throws ClassRosterPersistenceException {
+    private void createItem() throws ClassRosterPersistenceException {
 
         boolean hasErrors = false;
         do {
-            Student currentStudent = view.getNewStudentInfo();
+            Item currentItem = view.getNewItemInfo();
             try {
-                services.createStudent(currentStudent);
+                services.createItem(currentItem);
 
                 hasErrors = false;
             } catch (ClassRosterDuplicateIdException | ClassRosterDataValidationException e) {
@@ -87,47 +89,47 @@ public class ClassRosterController {
         } while (hasErrors);
     }
 
-    private void listStudents() throws ClassRosterPersistenceException {
-        List<Student> studentList = services.getAllStudents();
-        view.displayStudentList(studentList);
+    private void listItems() throws ClassRosterPersistenceException {
+        List<Item> studentList = services.getMap();
+        view.displayItemList(studentList);
     }
 
-    private void viewStudent() throws ClassRosterPersistenceException {
+    private void viewItem() throws ClassRosterPersistenceException {
 
-        String studentId = view.getStudentMenu();
-        Student student = services.getStudent(studentId);
-        view.listStudent(student);
+        String studentId = view.getItemMenu();
+        Item student = services.getItem(studentId);
+        view.listItem(student);
     }
 
-    private void removeStudent() throws ClassRosterPersistenceException {
+    private void removeItem() throws ClassRosterPersistenceException {
 
-        String studentId = view.getStudentMenu();
-        services.removeStudent(studentId);
+        String studentId = view.getItemMenu();
+        services.removeItem(studentId);
     }
 
-    private int getMenuSelect(List<Student> studentList, int i) throws ClassRosterPersistenceException {
+    private int getMenuSelect(List<Item> studentList, int i) throws ClassRosterPersistenceException {
 
         return view.initialMenu(studentList);
     }
 
-    private void listStudent() throws ClassRosterPersistenceException {
-        List<Student> someStudent = services.getAllStudents();
-        view.listAllStudent(someStudent);
+    private void listItem() throws ClassRosterPersistenceException {
+        List<Item> someItem = services.updateAllItems();
+        view.listAllItem(someItem);
 
     }
 
-    private void getStudent() throws ClassRosterPersistenceException {
-        String name = view.getStudentMenu();
-        Student foundStudent = services.getStudent(name);
-        view.listStudent(foundStudent);
+    private void getItem() throws ClassRosterPersistenceException {
+        String name = view.getItemMenu();
+        Item foundItem = services.getItem(name);
+        view.listItem(foundItem);
     }
 
-    private void editStudent() throws ClassRosterPersistenceException {
-        String name = view.editStudentMenu();
-        Student studentToEdit = services.getStudent(name);
-        Student updatedStudent = view.editStudent(studentToEdit);
-        services.editStudent(name);
-        view.listStudent(updatedStudent);
+    private void editItem() throws ClassRosterPersistenceException, FileNotFoundException {
+        String name = view.editItemMenu();
+        Item studentToEdit = services.getItem(name);
+        Item updatedItem = view.editItem(studentToEdit);
+        services.editItem(name);
+        view.listItem(updatedItem);
     }
 
 }

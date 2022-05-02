@@ -7,10 +7,12 @@ package Services;
 import dao.ClassRosterAuditDao;
 import dao.ClassRosterDao;
 import dao.ClassRosterPersistenceException;
-import dto.Student;
+import dto.Item;
 import java.util.List;
 import dao.ClassRosterDaoFileImpl;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +33,7 @@ public class ServiceLayer implements ServiceLayerInterface {
     }
 
     @Override
-    public void createStudent(Student student) throws
+    public void createItem(Item student) throws
             ClassRosterDuplicateIdException,
             ClassRosterDataValidationException,
             ClassRosterPersistenceException {
@@ -40,67 +42,77 @@ public class ServiceLayer implements ServiceLayerInterface {
         // associated with the given student's id
         // If so, we're all done here - 
         // throw a ClassRosterDuplicateIdException
-        if (dao.findStudent(student.getName()) != null) {
+        if (dao.findItem(student.getName()) != null) {
             throw new ClassRosterDuplicateIdException(
-                    "ERROR: Could not create student.  Student Id "
+                    "ERROR: Could not create student.  Item Id "
                     + student.getName()
                     + " already exists");
         }
 
-        // Now validate all the fields on the given Student object.  
+        // Now validate all the fields on the given Item object.  
         // This method will throw an
         // exception if any of the validation rules are violated.
-        validateStudentData(student);
+        validateItemData(student);
 
         // We passed all our business rules checks so go ahead 
-        // and persist the Student object
-        dao.addStudent(student, student.getName());
+        // and persist the Item object
+        dao.addItem(student, student.getName());
 
         // The student was successfully created, now write to the audit log
         auditDao.writeAuditEntry(
-                "Student " + student.getName() + " CREATED.");
+                "Item " + student.getName() + " CREATED.");
 
     }
 
     @Override
-    public List<Student> getAllStudents() throws ClassRosterPersistenceException {
+    public List<Item> getAllItems() throws ClassRosterPersistenceException {
         try {
-            dao.loadStudent();
+            dao.loadItem();
         } catch (FileNotFoundException ex) {
             throw new ClassRosterPersistenceException("Could not load the student into the file", ex);
         }
-        return dao.getAllStudent();
+        return dao.getAllItem();
+    }
+
+    public List<Item> updateAllItems() throws ClassRosterPersistenceException {
+     
+        return dao.updateAllItem();
+    }
+
+    
+    @Override
+    public Item getItem(String studentId) throws ClassRosterPersistenceException {
+        return dao.findItem(studentId);
     }
 
     @Override
-    public Student getStudent(String studentId) throws ClassRosterPersistenceException {
-        return dao.findStudent(studentId);
-    }
-
-    @Override
-    public Student removeStudent(String studentId) throws ClassRosterPersistenceException {
-        Student removedStudent = dao.removeStudent(studentId);
+    public Item removeItem(String studentId) throws ClassRosterPersistenceException {
+        Item removedItem = dao.removeItem(studentId);
         // Write to audit log
-        auditDao.writeAuditEntry("Student " + studentId + " REMOVED.");
-        return removedStudent;
+        auditDao.writeAuditEntry("Item " + studentId + " REMOVED.");
+        return removedItem;
     }
 
-    public Student editStudent(String studentId) throws ClassRosterPersistenceException, FileNotFoundException {
-        Student someStudent = dao.findStudent(studentId);
-        dao.editStudent(someStudent, studentId);
-        dao.loadStudent();
-        return someStudent;
+    public Item editItem(String studentId) throws ClassRosterPersistenceException, FileNotFoundException {
+        Item someItem = dao.findItem(studentId);
+        dao.editItem(someItem, studentId);
+     //   dao.updateAllItem();
+        return someItem;
     }
 
-    private void validateStudentData(Student student) throws
+    private void validateItemData(Item student) throws
             ClassRosterDataValidationException {
 
         if (student.getName() == null
                 || student.getName().trim().length() == 0
-                || student.getGrade().trim().length() == 0
-                || student.getId() == 0) {
+                || student.getPrice() == BigDecimal.valueOf(0)
+                || student.getInStock() == 0) {
             throw new ClassRosterDataValidationException(
                     "ERROR: All fields [First Name, Last Name, Cohort] are required.");
         }
+    }
+
+    public List<Item> getMap() {
+        return dao.getMap();
     }
 }

@@ -4,24 +4,32 @@
  */
 package dao;
 
-import dto.Student;
+import dto.Item;
 import java.io.FileNotFoundException;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author slalo
  */
 public interface ClassRosterDao {
-    Student addStudent(Student someStudent, String name) throws ClassRosterPersistenceException;
+    Item addItem(Item someItem, String name) throws ClassRosterPersistenceException;
     
-    Student removeStudent(String name) throws ClassRosterPersistenceException;
+    Item removeItem(String name) throws ClassRosterPersistenceException;
     
-    Student editStudent(Student someStudent, String name) throws ClassRosterPersistenceException;
+    Item editItem(Item someItem, String name) throws ClassRosterPersistenceException;
     
-    List<Student> getAllStudent()throws ClassRosterPersistenceException;
+    List<Item> getAllItem()throws ClassRosterPersistenceException;
     
-    Student findStudent(String adress) throws ClassRosterPersistenceException;
+    Item findItem(String adress) throws ClassRosterPersistenceException;
     
-    void loadStudent() throws ClassRosterPersistenceException, FileNotFoundException;
+    void loadItem() throws ClassRosterPersistenceException, FileNotFoundException;
+    
+    public List<Item> updateAllItem() throws ClassRosterPersistenceException;
+    
+    List<Item> getMap();
+    
+   
 }

@@ -12,6 +12,7 @@ import dao.ClassRosterAuditDaoFileImpl;
 import dao.ClassRosterDao;
 import dao.ClassRosterPersistenceException;
 import dao.ClassRosterDaoFileImpl;
+import java.io.FileNotFoundException;
 import views.ClassRosterView;
 import views.UserIO;
 import views.UserIOConsoleImpl;
@@ -22,7 +23,7 @@ import views.UserIOConsoleImpl;
  */
 public class ClassRoster {
 
-   public static void main(String[] args) throws ClassRosterPersistenceException {
+   public static void main(String[] args) throws ClassRosterPersistenceException, FileNotFoundException {
     // Instantiate the UserIO implementation
     UserIO myIo = new UserIOConsoleImpl();
     // Instantiate the View and wire the UserIO implementation into it

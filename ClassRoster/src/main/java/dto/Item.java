@@ -4,28 +4,29 @@
  */
 package dto;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
  *
  * @author slalo
  */
-public class Student {
+public class Item {
 
-    private String grade = "";
+    private BigDecimal price;
     private String name = "";
-    private int id;
+    private int inStock;
 
-    public Student(String studentId) {
+    public Item(String studentId) {
         this.name=studentId;
     }
 
-    public String getGrade() {
-        return grade;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getName() {
@@ -36,18 +37,18 @@ public class Student {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getInStock() {
+        return inStock;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setInStock(int inStock) {
+        this.inStock = inStock;
     }
 
-    public Student(String name, String grade, int id) {
-        this.grade = grade;
+    public Item(String name, BigDecimal grade, int id) {
+        this.price = grade;
         this.name = name;
-        this.id = id;
+        this.inStock = id;
 
     }
 
@@ -68,19 +69,19 @@ public class Student {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Student other = (Student) obj;
-        if (!Objects.equals(this.grade, other.grade)) {
+        final Item other = (Item) obj;
+        if (!Objects.equals(this.price, other.price)) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        return Objects.equals(this.id, other.id);
+        return Objects.equals(this.inStock, other.inStock);
     }
 
     @Override
     public String toString() {
-        return "Student{" + "Name= " + name + "  Grade = " + grade + ", id=" + id + '}';
+        return "Student{" + "Name= " + name + "  Grade = " + price + ", id=" + inStock + '}';
     }
 
 }

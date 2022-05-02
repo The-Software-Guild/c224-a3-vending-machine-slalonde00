@@ -7,6 +7,7 @@
 package views;
 
 import dao.ClassRosterPersistenceException;
+import java.math.BigDecimal;
 
 /**
  *
@@ -37,6 +38,8 @@ public interface UserIO {
     long readLong(String prompt, long min, long max);
 
     String returnString(String prompt);
+    
+    BigDecimal readBigDecimal(String prompt);
 }
     
 
