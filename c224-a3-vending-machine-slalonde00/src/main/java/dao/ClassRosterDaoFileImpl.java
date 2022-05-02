@@ -39,7 +39,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
 
         }
         someStudent.add(newStudent);
-        writeStudent();
+       
         return newStudent;
     }
 
@@ -53,7 +53,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
 
         Item removedStudent = someStudent.get(Integer.parseInt(id));
         someStudent.remove(id);
-        writeStudent();
+        
         return removedStudent;
     }
 
@@ -64,11 +64,10 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         } catch (FileNotFoundException ex) {
         } catch (Exception ex) {
         }
-        someStudent.remove(oldStudent);
-        Item newStudent = new Item(someStudent.get(id).getName(), someStudent.get(id).getCost(), someStudent.get(id).getInStock());
-        someStudent.add(newStudent);
-        writeStudent();
-        return newStudent;
+       
+        oldStudent.setInStock(someStudent.get(id).getInStock());
+       
+        return oldStudent;
 
     }
 
@@ -104,13 +103,13 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
             List<Item> studentList = this.getAllStudent();
             String studentAsText;
 
-            for (Item student : studentList) {
-                studentAsText = marshallStudents(student);
-
+             
+                studentAsText = marshallStudents(studentList.get(0));
+                System.out.println(studentAsText);
                 out.println(studentAsText);
                 out.flush();
 
-            }
+            
 
             out.close();
 

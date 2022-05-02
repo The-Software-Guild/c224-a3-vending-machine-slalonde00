@@ -1,3 +1,4 @@
+
 package views;
 
 import Services.ServiceLayer;
@@ -24,11 +25,12 @@ public class ClassRosterView {
     }
 
     public int initialMenu() throws ClassRosterPersistenceException, Exception {
-
+        int i=1;
         io.print("Initial Menu");
         io.print("please select the produit you wish to buy");
-        displayStudentList(services.getAllStudents());
+        displayStudentList(services.getAllStudents(), i);
         io.print("6. Exit");
+       
         return io.readInt("Please Select one of the above option", 1, 6);
     }
 
@@ -48,21 +50,19 @@ public class ClassRosterView {
     }
 
     public int editStudentMenu() throws ClassRosterPersistenceException {
-        int i = 0;
         io.print("Buying a product ?");
-        int selector = io.readInt("Press " + i + " to confirm your purchase");
-        i++;
-        return selector;
+        return io.readInt("Please enter the 0 to confirm your purchase");
     }
 
     public Item editStudent(Item someStudent) throws ClassRosterPersistenceException {
 
         int id = io.readInt("How many do you wanna buy ?");
-
-        someStudent.setInStock(someStudent.getInStock() - id);
+        
+            someStudent.setInStock(someStudent.getInStock()-id);
+        
 
         io.readString("Thank you for your purchase");
-        System.out.println(someStudent.getInStock() - id);
+        
         return someStudent;
     }
 
@@ -110,14 +110,14 @@ public class ClassRosterView {
         return io;
     }
 
-    public void displayStudentList(List<Item> studentList) {
-        int i = 1;
+    public void displayStudentList(List<Item> studentList, int i) {
         for (Item currentStudent : studentList) {
             String studentInfo = String.format("#%s : %s %s", i + ". ",
                     currentStudent.getName(),
                     currentStudent.getCost() + "$",
                     currentStudent.getInStock());
             io.print(studentInfo);
+            i++;
         }
 
     }

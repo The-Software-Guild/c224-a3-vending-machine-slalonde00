@@ -82,7 +82,7 @@ public class ServiceLayer implements ServiceLayerInterface {
     }
 
     public Item editStudent(int studentId) throws ClassRosterPersistenceException {
-        Item someStudent = dao.findStudent(((studentId)));
+        Item someStudent = dao.findStudent(studentId);
         dao.editStudent(someStudent, studentId);
         return someStudent;
     }

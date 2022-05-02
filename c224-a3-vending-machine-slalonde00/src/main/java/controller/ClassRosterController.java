@@ -1,4 +1,3 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -118,6 +117,7 @@ private void removeStudent() throws ClassRosterPersistenceException {
       }
 
     private void editStudent() throws ClassRosterPersistenceException {
+        int i =1;
         int name = view.editStudentMenu();
         Item studentToEdit = services.getStudent(name);
         Item updatedStudent = view.editStudent(studentToEdit);
