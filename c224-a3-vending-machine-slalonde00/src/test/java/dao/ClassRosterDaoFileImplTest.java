@@ -49,16 +49,14 @@ public class ClassRosterDaoFileImplTest {
     @Test
     public void testAddGetStudent() throws Exception {
         // Create our method test inputs
-        String studentId = "0001";
-        Item student = new Item(studentId);
-        student.setName("Ada");
-        student.setCost("100");
-        student.setInStock("Java-May-1845");
+        String studentId = "test";
+        double cost = 1.0;
+        int stock = 1;
+        Item student = new Item(studentId, cost, stock);
 
-        //  Add the student to the DAO
-        testDao.addStudent(student, studentId);
+      
         // Get the student from the DAO
-        Item retrievedStudent = testDao.findStudent(studentId);
+        Item retrievedStudent = testDao.findStudent(0);
 
         // Check the data is equal
         assertEquals(student.getName(),
@@ -77,14 +75,14 @@ public class ClassRosterDaoFileImplTest {
         // Create our first student
         Item firstStudent = new Item("0001");
         firstStudent.setName("Ada");
-        firstStudent.setCost("Lovelace");
-        firstStudent.setInStock("Java-May-1845");
+        firstStudent.setCost(1.00);
+        firstStudent.setInStock(1);
 
         // Create our second student
         Item secondStudent = new Item("0002");
         secondStudent.setName("Charles");
-        secondStudent.setCost("Babbage");
-        secondStudent.setInStock(".NET-May-1845");
+        secondStudent.setCost(10.00);
+        secondStudent.setInStock(100);
 
         // Add both our students to the DAO
         testDao.addStudent(firstStudent, firstStudent.getName());
@@ -109,14 +107,14 @@ public class ClassRosterDaoFileImplTest {
     public void testRemoveStudent() throws Exception {
         // Create two new students
         Item firstStudent = new Item("0001");
-        firstStudent.setName("Ada");
-        firstStudent.setCost("Lovelace");
-        firstStudent.setInStock("Java-May-1945");
+        firstStudent.setName("test");
+        firstStudent.setCost(10.00);
+        firstStudent.setInStock(0);
 
         Item secondStudent = new Item("0002");
         secondStudent.setName("Charles");
-        secondStudent.setCost("Babbage");
-        secondStudent.setInStock(".NET-May-1945");
+        secondStudent.setCost(10.00);
+        secondStudent.setInStock(0);
 
         // Add both to the DAO
         testDao.addStudent(firstStudent, firstStudent.getName());
@@ -151,10 +149,10 @@ public class ClassRosterDaoFileImplTest {
         assertTrue(allStudents.isEmpty(), "The retrieved list of students should be empty.");
 
         // Try to 'get' both students by their old id - they should be null!
-        Item retrievedStudent = testDao.findStudent(firstStudent.getName());
+        Item retrievedStudent = testDao.findStudent(0);
         assertNull(retrievedStudent, "Ada was removed, should be null.");
 
-        retrievedStudent = testDao.findStudent(secondStudent.getName());
+        retrievedStudent = testDao.findStudent(0);
         assertNull(retrievedStudent, "Charles was removed, should be null.");
 
     }

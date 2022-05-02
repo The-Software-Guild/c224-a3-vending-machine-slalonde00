@@ -66,7 +66,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
         }
        
         oldStudent.setInStock(someStudent.get(id).getInStock());
-       
+      writeStudent();
         return oldStudent;
 
     }
@@ -105,7 +105,7 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
 
              
                 studentAsText = marshallStudents(studentList.get(0));
-                System.out.println(studentAsText);
+                
                 out.println(studentAsText);
                 out.flush();
 
@@ -137,9 +137,9 @@ public class ClassRosterDaoFileImpl implements ClassRosterDao {
     }
 
     private String marshallStudents(Item someStudent) {
-        String studentAsString = someStudent.getCost() + delemiter;
-        studentAsString += someStudent.getName() + "::";
-        studentAsString += someStudent.getInStock() + "::";
+        String studentAsString = someStudent.getName() + delemiter;
+        studentAsString += someStudent.getCost() + delemiter;
+        studentAsString += someStudent.getInStock() + delemiter;
         return studentAsString;
     }
 

@@ -84,7 +84,7 @@ private void createStudent() throws ClassRosterPersistenceException {
 
 private void listStudents() throws ClassRosterPersistenceException {
     List<Item> studentList = services.getAllStudents();
-    view.displayStudentList(studentList);
+    view.displayStudentList(studentList,1);
 }
 
 private void viewStudent() throws ClassRosterPersistenceException {
@@ -122,7 +122,7 @@ private void removeStudent() throws ClassRosterPersistenceException {
         Item studentToEdit = services.getStudent(name);
         Item updatedStudent = view.editStudent(studentToEdit);
         services.editStudent(name);
-        view.listStudent(updatedStudent);
+        
     }
 
     

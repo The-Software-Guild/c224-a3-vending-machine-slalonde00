@@ -1,4 +1,3 @@
-
 package views;
 
 import Services.ServiceLayer;
@@ -25,12 +24,12 @@ public class ClassRosterView {
     }
 
     public int initialMenu() throws ClassRosterPersistenceException, Exception {
-        int i=1;
+        int i = 1;
         io.print("Initial Menu");
         io.print("please select the produit you wish to buy");
         displayStudentList(services.getAllStudents(), i);
         io.print("6. Exit");
-       
+
         return io.readInt("Please Select one of the above option", 1, 6);
     }
 
@@ -57,12 +56,11 @@ public class ClassRosterView {
     public Item editStudent(Item someStudent) throws ClassRosterPersistenceException {
 
         int id = io.readInt("How many do you wanna buy ?");
-        
-            someStudent.setInStock(someStudent.getInStock()-id);
-        
+
+        someStudent.setInStock(someStudent.getInStock() - id);
 
         io.readString("Thank you for your purchase");
-        
+
         return someStudent;
     }
 
