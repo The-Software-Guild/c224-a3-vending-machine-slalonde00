@@ -54,7 +54,10 @@ public class Item {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 3;
+        hash = 17 * hash + Objects.hashCode(this.price);
+        hash = 17 * hash + Objects.hashCode(this.name);
+        hash = 17 * hash + this.inStock;
         return hash;
     }
 
@@ -70,18 +73,20 @@ public class Item {
             return false;
         }
         final Item other = (Item) obj;
-        if (!Objects.equals(this.price, other.price)) {
+        if (this.inStock != other.inStock) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        return Objects.equals(this.inStock, other.inStock);
+        return Objects.equals(this.price, other.price);
     }
 
     @Override
     public String toString() {
-        return "Student{" + "Name= " + name + "  Grade = " + price + ", id=" + inStock + '}';
+        return "Item{" + "price=" + price + ", name=" + name + ", inStock=" + inStock + '}';
     }
+
+   
 
 }

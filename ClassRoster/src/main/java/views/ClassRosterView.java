@@ -4,7 +4,7 @@
  */
 package views;
 
-import dao.ClassRosterPersistenceException;
+import dao.ItemPersistenceException;
 import dto.Item;
 import java.math.BigDecimal;
 import java.util.List;
@@ -21,11 +21,11 @@ public class ClassRosterView {
         this.io = io;
     }
 
-    public int initialMenu(List<Item> studentList) throws ClassRosterPersistenceException {
+    public int initialMenu(List<Item> itemList) throws ItemPersistenceException {
 
         io.print("Initial Menu");
         io.print("please select the operation you wish to perform");
-        displayItemListMenu(studentList);
+        displayItemListMenu(itemList);
         io.print("0. Buy an item");
         io.print("1. List all item");
         io.print("2. List a item info");
@@ -33,25 +33,10 @@ public class ClassRosterView {
         return io.readInt("Please Select one of the above option", 0, 3);
     }
 
-    public Item addItemMenu() throws ClassRosterPersistenceException {
-        io.print("Add student");
-        String grade = io.readString("Please enter grade");
-        BigDecimal price = io.readBigDecimal("Please enter name");
-        int id = io.readInt("Please enter id");
-        Item newItem = new Item(grade, price, id);
-        return newItem;
-    }
-
-    public String deleteItemMenu() {
-        io.print("Delete student");
-        String name = io.readString("Please enter the name of the student you wish to delete");
-        return name;
-    }
-
     public String editItemMenu() {
         io.print("Buy an item");
         
-        return io.readString("Please enter the name of the item you wish to buy");
+        return io.readString("Please enter the # of the item you wish to buy");
     }
 
     public Item editItem(Item someItem) {
@@ -65,7 +50,7 @@ public class ClassRosterView {
 
     public void listItem(Item someItem) {
         io.print("Name : " + someItem.getName());
-        io.print("Grade : " + someItem.getPrice());
+        io.print("Price : " + someItem.getPrice());
         io.print("id : " + someItem.getInStock());
 
     }
@@ -79,8 +64,8 @@ public class ClassRosterView {
     }
 
     public String getItemMenu() {
-        io.print("Find student");
-        return io.readString("Enter student's name to find the student");
+        io.print("Find item");
+        return io.readString("Enter item's name to find the item");
 
     }
 
@@ -89,15 +74,15 @@ public class ClassRosterView {
         io.print(errorMsg);
     }
 
-    public Item getNewItemInfo() throws ClassRosterPersistenceException {
+    public Item getNewItemInfo() throws ItemPersistenceException {
         String Name = io.readString("Please enter Item Name");
-        BigDecimal Grade = io.readBigDecimal("Please enter Item Grade");
-        int Id = io.readInt("Please enter Item Id");
+        BigDecimal Price = io.readBigDecimal("Please enter Item Price");
+        int InStock = io.readInt("Please enter Item InStock");
 
         Item currentItem = new Item(Name);
         currentItem.setName(Name);
-        currentItem.setPrice(Grade);
-        currentItem.setInStock(Id);
+        currentItem.setPrice(Price);
+        currentItem.setInStock(InStock);
         return currentItem;
     }
 
@@ -105,28 +90,28 @@ public class ClassRosterView {
         return io;
     }
 
-    public void displayItemList(List<Item> studentList) {
-        for (Item currentItem : studentList) {
-            String studentInfo = String.format("#%s : %s %s",
+    public void displayItemList(List<Item> itemList) {
+        for (Item currentItem : itemList) {
+            String itemInfo = String.format("#%s : %s %s",
                     currentItem.getName(),
                     currentItem.getPrice(),
                     currentItem.getInStock());
-            io.print(studentInfo);
+            io.print(itemInfo);
         }
         io.readString("Please hit enter to continue.");
     }
     
     
-    public void displayItemListMenu(List<Item> studentList) {
+    public void displayItemListMenu(List<Item> itemList) {
        
-        for (int i =0; i<studentList.size(); i++) {
-            String studentInfo = "Item " + i + "\n" + "Name : ";
-             studentInfo+=studentList.get(i).getName()+"\n";
-             studentInfo+="Price : ";
-             studentInfo+=studentList.get(i).getPrice() +"\n";
-             studentInfo+= "In Stock : ";
-             studentInfo+= studentList.get(i).getInStock() + "\n";
-            io.print(studentInfo);
+        for (int i =0; i<itemList.size(); i++) {
+            String itemInfo = "Item " + i + "\n" + "Name : ";
+             itemInfo+=itemList.get(i).getName()+"\n";
+             itemInfo+="Price : ";
+             itemInfo+=itemList.get(i).getPrice() +"\n";
+             itemInfo+= "In Stock : ";
+             itemInfo+= itemList.get(i).getInStock() + "\n";
+            io.print(itemInfo);
         }
         io.readString("Please hit enter to continue.");
     }

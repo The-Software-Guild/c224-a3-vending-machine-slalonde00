@@ -8,13 +8,13 @@ package Services;
  *
  * @author slalo
  */
-public class ClassRosterDataValidationException extends Exception {
- 
-    public ClassRosterDataValidationException(String message) {
+public class ItemDuplicateIdException extends Exception {
+    
+        public ItemDuplicateIdException(String message) {
         super(message);
     }
 
-    public ClassRosterDataValidationException(String message,
+    public ItemDuplicateIdException(String message,
             Throwable cause) {
         super(message, cause);
     }

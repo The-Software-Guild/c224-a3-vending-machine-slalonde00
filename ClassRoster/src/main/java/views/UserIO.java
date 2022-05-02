@@ -6,7 +6,7 @@
  */
 package views;
 
-import dao.ClassRosterPersistenceException;
+import dao.ItemPersistenceException;
 import java.math.BigDecimal;
 
 /**
@@ -18,9 +18,9 @@ public interface UserIO {
 
     void print(String msg);
 
-    int readInt(String prompt) throws ClassRosterPersistenceException;
+    int readInt(String prompt) throws ItemPersistenceException;
 
-    int readInt(String prompt, int min, int max) throws ClassRosterPersistenceException;
+    int readInt(String prompt, int min, int max) throws ItemPersistenceException;
 
     String readString(String prompt);
 

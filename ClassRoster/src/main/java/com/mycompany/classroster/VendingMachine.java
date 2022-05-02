@@ -6,36 +6,36 @@
 package com.mycompany.classroster;
 
 import Services.ServiceLayer;
-import controller.ClassRosterController;
-import dao.ClassRosterAuditDao;
-import dao.ClassRosterAuditDaoFileImpl;
-import dao.ClassRosterDao;
-import dao.ClassRosterPersistenceException;
-import dao.ClassRosterDaoFileImpl;
+import controller.VendingMachineController;
+import dao.ItemAuditDaoFileImpl;
+import dao.ItemPersistenceException;
+import dao.ItemDaoFileImpl;
 import java.io.FileNotFoundException;
 import views.ClassRosterView;
 import views.UserIO;
 import views.UserIOConsoleImpl;
+import dao.ItemAuditDao;
+import dao.ItemDao;
 
 /**
  *
  * @author slalo
  */
-public class ClassRoster {
+public class VendingMachine {
 
-   public static void main(String[] args) throws ClassRosterPersistenceException, FileNotFoundException {
+   public static void main(String[] args) throws ItemPersistenceException, FileNotFoundException {
     // Instantiate the UserIO implementation
     UserIO myIo = new UserIOConsoleImpl();
     // Instantiate the View and wire the UserIO implementation into it
     ClassRosterView myView = new ClassRosterView(myIo);
     // Instantiate the DAO
-    ClassRosterDao myDao = new ClassRosterDaoFileImpl();
+    ItemDao myDao = new ItemDaoFileImpl();
     // Instantiate the Audit DAO
-    ClassRosterAuditDao myAuditDao = new ClassRosterAuditDaoFileImpl();
+    ItemAuditDao myAuditDao = new ItemAuditDaoFileImpl();
     // Instantiate the Service Layer and wire the DAO and Audit DAO into it
     ServiceLayer myService = new ServiceLayer(myDao, myAuditDao);
     // Instantiate the Controller and wire the Service Layer into it
-    ClassRosterController controller = new ClassRosterController(myView, myService);
+    VendingMachineController controller = new VendingMachineController(myView, myService);
     // Kick off the Controller
     controller.run();
 }

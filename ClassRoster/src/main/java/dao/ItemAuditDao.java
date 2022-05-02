@@ -8,8 +8,8 @@ package dao;
  *
  * @author slalo
  */
-public interface ClassRosterAuditDao {
+public interface ItemAuditDao {
    
-    public void writeAuditEntry(String entry) throws ClassRosterPersistenceException;
+    public void writeAuditEntry(String entry) throws ItemPersistenceException;
    
 }

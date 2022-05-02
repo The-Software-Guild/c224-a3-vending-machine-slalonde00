@@ -8,14 +8,14 @@ package dao;
  *
  * @author slalo
  */
-public class ClassRosterPersistenceException extends Exception {
+public class ItemPersistenceException extends Exception {
    
-    public ClassRosterPersistenceException(String message) {
+    public ItemPersistenceException(String message) {
         super(message);
     }
     
    
-    public ClassRosterPersistenceException(String message, Throwable cause) {
+    public ItemPersistenceException(String message, Throwable cause) {
         super(message, cause);
     }
 }

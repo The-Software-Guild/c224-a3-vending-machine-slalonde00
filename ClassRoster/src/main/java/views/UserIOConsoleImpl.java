@@ -4,7 +4,7 @@
  */
 package views;
 
-import dao.ClassRosterPersistenceException;
+import dao.ItemPersistenceException;
 import java.math.BigDecimal;
 import java.util.Scanner;
 
@@ -22,7 +22,7 @@ public class UserIOConsoleImpl implements UserIO {
     }
 
     @Override
-    public int readInt(String prompt) throws ClassRosterPersistenceException {
+    public int readInt(String prompt) throws ItemPersistenceException {
         System.out.println(prompt);
         int ans;
 
@@ -31,7 +31,7 @@ public class UserIOConsoleImpl implements UserIO {
 
             ans = Integer.parseInt(sc.nextLine());
         } catch (NumberFormatException e) {
-            throw new ClassRosterPersistenceException("Integer was not entered");
+            throw new ItemPersistenceException("Integer was not entered");
 
         }
 
@@ -39,7 +39,7 @@ public class UserIOConsoleImpl implements UserIO {
     }
 
     @Override
-    public int readInt(String prompt, int min, int max) throws ClassRosterPersistenceException {
+    public int readInt(String prompt, int min, int max) throws ItemPersistenceException {
         int ans = 0;
 
         while (true) {
@@ -47,7 +47,7 @@ public class UserIOConsoleImpl implements UserIO {
             try {
                 ans = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
-                throw new ClassRosterPersistenceException("Integer was not entered");
+                throw new ItemPersistenceException("Integer was not entered");
             }
 
             if (ans >= min && ans <= max) {
