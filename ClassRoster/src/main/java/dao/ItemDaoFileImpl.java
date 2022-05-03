@@ -29,7 +29,6 @@ public class ItemDaoFileImpl implements ItemDao {
         this.itemFile = itemFile;
     }
 
-
     @Override
     public Item editItem(Item editedItem) throws ItemPersistenceException {
 
@@ -41,36 +40,17 @@ public class ItemDaoFileImpl implements ItemDao {
 
     @Override
     public List<Item> getAllItem() throws ItemPersistenceException {
-        try {
-            loadItem();
-        } catch (FileNotFoundException ex) {
- throw new ItemPersistenceException("Could not load from file", ex);
-        } 
+
         return someItem;
     }
 
     public List<Item> updateAllItem() throws ItemPersistenceException {
-        try {
-            loadItem();
-        } catch (FileNotFoundException ex) {
-             throw new ItemPersistenceException("Could not load from file", ex);
-        }
         
-        List<Item> newArray = new ArrayList(someItem);
-
-   
-
-        return newArray;
+        return someItem;
     }
 
     @Override
     public Item findItem(int address) throws ItemPersistenceException {
-        try {
-            loadItem();
-        } catch (FileNotFoundException ex) {
-        } catch (Exception ex) {
-
-        }
         return someItem.get(address);
     }
 
@@ -82,16 +62,14 @@ public class ItemDaoFileImpl implements ItemDao {
             out = new PrintWriter(new FileWriter(itemFile));
             System.out.println("Writing items infos to file : ");
 
-            
-
             List<Item> itemList = updateAllItem();
-            
+
             System.out.println(updateAllItem());
-            
+
             String itemAsText;
 
             System.out.println(itemList);
-            
+
             for (Item item : itemList) {
 
                 itemAsText = marshallItems(item);
@@ -120,6 +98,7 @@ public class ItemDaoFileImpl implements ItemDao {
 
         while (s.hasNextLine()) {
             String currentLine = s.nextLine();
+            System.out.println(currentLine);
             Item currentItem = unMarshallItems(currentLine);
             someItem.add(currentItem);
         }
@@ -131,6 +110,7 @@ public class ItemDaoFileImpl implements ItemDao {
         String itemAsString = someItem.getName() + delemiter;
         itemAsString += someItem.getPrice() + delemiter;
         itemAsString += someItem.getInStock() + delemiter;
+        itemAsString += someItem.getId() + delemiter;
         return itemAsString;
     }
 
@@ -138,9 +118,10 @@ public class ItemDaoFileImpl implements ItemDao {
 
         String[] itemInfo = itemAsText.split(delemiter);
         String name = itemInfo[0];
-        BigDecimal grade = BigDecimal.valueOf(Double.parseDouble(itemInfo[1]));
-        int id = Integer.parseInt(itemInfo[2]);
-        Item newItem = new Item(name, grade, id);
+        BigDecimal price = BigDecimal.valueOf(Double.parseDouble(itemInfo[1]));
+        String inStock = (itemInfo[2]);
+        String Id = (itemInfo[3]);
+        Item newItem = new Item(name, price, Integer.parseInt(inStock), Integer.parseInt(Id));
         return newItem;
 
     }
@@ -152,9 +133,5 @@ public class ItemDaoFileImpl implements ItemDao {
     public void setSomeItem(List<Item> someItem) {
         this.someItem = someItem;
     }
-
-  
-
-   
 
 }

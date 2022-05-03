@@ -4,12 +4,9 @@
  */
 package Services;
 
-import Services.ServiceLayerException;
 import dto.Item;
 import dao.ItemPersistenceException;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -24,4 +21,6 @@ public interface ServiceLayerInterface {
 
     List<Item> updateAllItems() throws ItemPersistenceException;
   
+    
+    
 }

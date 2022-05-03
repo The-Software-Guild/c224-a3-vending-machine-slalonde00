@@ -7,14 +7,12 @@ package Services;
 import dao.ItemPersistenceException;
 import dto.Item;
 import java.util.List;
-import dao.ItemDaoFileImpl;
 import java.io.FileNotFoundException;
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import dao.ItemAuditDao;
 import dao.ItemDao;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,11 +33,6 @@ public class ServiceLayer implements ServiceLayerInterface {
 
     @Override
     public List<Item> getAllItems() throws ItemPersistenceException {
-        try {
-            dao.loadItem();
-        } catch (FileNotFoundException ex) {
-            throw new ItemPersistenceException("Could not load the item into the file", ex);
-        }
         return dao.getAllItem();
     }
 
@@ -51,7 +44,12 @@ public class ServiceLayer implements ServiceLayerInterface {
     
     @Override
     public Item getItem(int itemId) throws ItemPersistenceException {
+        
         return dao.findItem(itemId);
+    }
+    
+    public void loadItem() throws ItemPersistenceException, FileNotFoundException {
+        dao.loadItem();
     }
 
 

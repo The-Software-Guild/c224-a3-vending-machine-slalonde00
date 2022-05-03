@@ -40,6 +40,7 @@ public class ClassRosterView {
     }
 
     public Item editItem(Item someItem) {
+        
         String id = io.readString("How many do you wanna Buy ?");
         if (!id.equals("")) {
             someItem.setInStock((someItem.getInStock()) - Integer.parseInt(id));
@@ -63,9 +64,9 @@ public class ClassRosterView {
 
     }
 
-    public String getItemMenu() {
+    public int getItemMenu() throws ItemPersistenceException {
         io.print("Find item");
-        return io.readString("Enter item's name to find the item");
+        return io.readInt("Enter item's # to find the item");
 
     }
 
@@ -98,8 +99,7 @@ public class ClassRosterView {
                     currentItem.getInStock());
             io.print(itemInfo);
         }
-        io.readString("Please hit enter to continue.");
-    }
+       }
     
     
     public void displayItemListMenu(List<Item> itemList) {
@@ -113,6 +113,6 @@ public class ClassRosterView {
              itemInfo+= itemList.get(i).getInStock() + "\n";
             io.print(itemInfo);
         }
-        io.readString("Please hit enter to continue.");
+
     }
 }

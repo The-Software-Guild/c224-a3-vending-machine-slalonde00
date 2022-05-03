@@ -33,6 +33,7 @@ public class VendingMachineController {
     }
 
     public void run() throws ItemPersistenceException, FileNotFoundException {
+       
         boolean keepgoing = true;
         int menuSelect = 0;
         int i = 0;
@@ -44,7 +45,7 @@ public class VendingMachineController {
                     editItem();
                     break;
                 case 1:
-                    listItem();
+                    listItems();
                     break;
                 case 2:
                     getItem();
@@ -74,15 +75,16 @@ public class VendingMachineController {
     }
 
 
-    private void listItems() throws ItemPersistenceException {
+    private void listItems() throws ItemPersistenceException, FileNotFoundException {
+        services.loadItem();
         List<Item> itemList = services.getAllItems();
-        view.displayItemList(itemList);
+        view.displayItemListMenu(itemList);
     }
 
-    private void viewItem() throws ItemPersistenceException {
-
-        String itemId = view.getItemMenu();
-        Item item = services.getItem(Integer.parseInt(itemId));
+    private void viewItem() throws ItemPersistenceException, FileNotFoundException {
+        
+        int itemId = view.getItemMenu();
+        Item item = services.getItem(itemId);
         view.listItem(item);
     }
 
@@ -91,23 +93,20 @@ public class VendingMachineController {
         return view.initialMenu(itemList);
     }
 
-    private void listItem() throws ItemPersistenceException {
-        List<Item> someItem = services.updateAllItems();
-        view.listAllItem(someItem);
 
-    }
-
-    private void getItem() throws ItemPersistenceException {
-        String name = view.getItemMenu();
-        Item foundItem = services.getItem(Integer.parseInt(name));
+    private void getItem() throws ItemPersistenceException, FileNotFoundException {
+        services.loadItem();
+        int name = view.getItemMenu();
+        Item foundItem = services.getItem(name);
         view.listItem(foundItem);
     }
 
     private void editItem() throws ItemPersistenceException, FileNotFoundException {
-        String name = view.editItemMenu();
-        Item itemToEdit = services.getItem(Integer.parseInt(name));
+        services.loadItem();
+        int name = Integer.parseInt(view.editItemMenu());
+        Item itemToEdit = services.getItem((name));
         Item updatedItem = view.editItem(itemToEdit);
-        services.editItem(Integer.parseInt(name));
+        services.editItem(name);
         view.listItem(updatedItem);
     }
 

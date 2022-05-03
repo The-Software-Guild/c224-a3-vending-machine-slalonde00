@@ -16,6 +16,15 @@ public class Item {
     private BigDecimal price;
     private String name = "";
     private int inStock;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public Item(String studentId) {
         this.name=studentId;
@@ -45,10 +54,11 @@ public class Item {
         this.inStock = inStock;
     }
 
-    public Item(String name, BigDecimal grade, int id) {
+    public Item(String name, BigDecimal grade, int stock, int id) {
         this.price = grade;
         this.name = name;
-        this.inStock = id;
+        this.inStock = stock;
+        this.id = id;
 
     }
 
