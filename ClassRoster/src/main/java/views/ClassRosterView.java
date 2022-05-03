@@ -50,10 +50,15 @@ public class ClassRosterView {
     }
 
     public void listItem(Item someItem) {
-        io.print("Name : " + someItem.getName());
-        io.print("Price : " + someItem.getPrice());
-        io.print("id : " + someItem.getInStock());
-
+       String itemInfo = "Name : ";
+             itemInfo+=someItem.getName()+"\n";
+             itemInfo+="Price : ";
+             itemInfo+=someItem.getPrice() +"\n";
+             itemInfo+= "In Stock : ";
+             itemInfo+= someItem.getInStock() + "\n";
+             itemInfo+= "Item id : ";
+             itemInfo+= someItem.getId()+ "\n";
+            io.print(itemInfo);
     }
 
     public void listAllItem(List<Item> someItem) {
@@ -111,6 +116,8 @@ public class ClassRosterView {
              itemInfo+=itemList.get(i).getPrice() +"\n";
              itemInfo+= "In Stock : ";
              itemInfo+= itemList.get(i).getInStock() + "\n";
+             itemInfo+= "Item id : ";
+             itemInfo+= itemList.get(i).getId()+ "\n";
             io.print(itemInfo);
         }
 

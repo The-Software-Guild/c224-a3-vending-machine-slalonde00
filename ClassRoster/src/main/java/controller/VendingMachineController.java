@@ -95,8 +95,8 @@ public class VendingMachineController {
 
 
     private void getItem() throws ItemPersistenceException, FileNotFoundException {
+       int name = view.getItemMenu();
         services.loadItem();
-        int name = view.getItemMenu();
         Item foundItem = services.getItem(name);
         view.listItem(foundItem);
     }

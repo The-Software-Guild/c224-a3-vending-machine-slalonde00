@@ -51,6 +51,7 @@ public class ItemDaoFileImpl implements ItemDao {
 
     @Override
     public Item findItem(int address) throws ItemPersistenceException {
+   
         return someItem.get(address);
     }
 
@@ -64,11 +65,11 @@ public class ItemDaoFileImpl implements ItemDao {
 
             List<Item> itemList = updateAllItem();
 
-            System.out.println(updateAllItem());
+           
 
             String itemAsText;
 
-            System.out.println(itemList);
+           
 
             for (Item item : itemList) {
 
