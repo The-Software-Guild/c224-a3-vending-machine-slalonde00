@@ -9,7 +9,7 @@ package Services;
  * @author slalo
  */
 public class ItemDataValidationException extends Exception {
- 
+
     public ItemDataValidationException(String message) {
         super(message);
     }
@@ -20,4 +20,3 @@ public class ItemDataValidationException extends Exception {
     }
 
 }
-

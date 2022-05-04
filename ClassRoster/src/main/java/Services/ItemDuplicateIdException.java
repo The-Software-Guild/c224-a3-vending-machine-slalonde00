@@ -9,8 +9,8 @@ package Services;
  * @author slalo
  */
 public class ItemDuplicateIdException extends Exception {
-    
-        public ItemDuplicateIdException(String message) {
+
+    public ItemDuplicateIdException(String message) {
         super(message);
     }
 
@@ -20,4 +20,3 @@ public class ItemDuplicateIdException extends Exception {
     }
 
 }
-

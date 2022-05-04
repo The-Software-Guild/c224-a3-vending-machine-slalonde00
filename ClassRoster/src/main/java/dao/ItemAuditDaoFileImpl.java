@@ -14,23 +14,22 @@ import java.time.LocalDateTime;
  * @author slalo
  */
 public class ItemAuditDaoFileImpl implements ItemAuditDao {
-   
+
     public static final String AUDIT_FILE = "audit.txt";
-   
+
     @Override
     public void writeAuditEntry(String entry) throws ItemPersistenceException {
         PrintWriter out;
-       
+
         try {
             out = new PrintWriter(new FileWriter(AUDIT_FILE, true));
         } catch (IOException e) {
             throw new ItemPersistenceException("Could not persist audit information.", e);
         }
- 
+
         LocalDateTime timestamp = LocalDateTime.now();
         out.println(timestamp.toString() + " : " + entry);
         out.flush();
     }
-    
-    
+
 }

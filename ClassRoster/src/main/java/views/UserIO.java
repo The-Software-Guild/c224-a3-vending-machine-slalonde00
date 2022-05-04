@@ -1,5 +1,3 @@
-
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -14,7 +12,6 @@ import java.math.BigDecimal;
  * @author slalo
  */
 public interface UserIO {
-    
 
     void print(String msg);
 
@@ -23,7 +20,6 @@ public interface UserIO {
     int readInt(String prompt, int min, int max) throws ItemPersistenceException;
 
     String readString(String prompt);
-
 
     double readDouble(String prompt);
 
@@ -38,8 +34,6 @@ public interface UserIO {
     long readLong(String prompt, long min, long max);
 
     String returnString(String prompt);
-    
+
     BigDecimal readBigDecimal(String prompt);
 }
-    
-
