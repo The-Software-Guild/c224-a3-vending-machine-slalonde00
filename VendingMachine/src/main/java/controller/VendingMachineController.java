@@ -104,8 +104,7 @@ public class VendingMachineController {
         view.listItem(foundItem);
     }
     
-    private void editItem() throws ItemPersistenceException, FileNotFoundException {
-        
+    private void editItem() throws ItemPersistenceException, FileNotFoundException {   
         int fund = view.getFund();
         int name = Integer.parseInt(view.editItemMenu());
         Item itemToEdit = services.getItem((name));
