@@ -4,7 +4,6 @@
  */
 package dto;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -13,7 +12,7 @@ import java.util.Objects;
  */
 public class Item {
 
-    private BigDecimal price;
+    private double price;
     private String name = "";
     private int inStock;
     private int id;
@@ -27,14 +26,14 @@ public class Item {
     }
 
     public Item(String studentId) {
-        this.name=studentId;
+        this.name = studentId;
     }
 
-    public BigDecimal getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -54,7 +53,7 @@ public class Item {
         this.inStock = inStock;
     }
 
-    public Item(String name, BigDecimal grade, int stock, int id) {
+    public Item(String name, double grade, int stock, int id) {
         this.price = grade;
         this.name = name;
         this.inStock = stock;
@@ -96,7 +95,5 @@ public class Item {
     public String toString() {
         return "Item{" + "price=" + price + ", name=" + name + ", inStock=" + inStock + '}';
     }
-
-   
 
 }

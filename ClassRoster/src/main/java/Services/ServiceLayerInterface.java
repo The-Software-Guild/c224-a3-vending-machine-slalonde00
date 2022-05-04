@@ -20,7 +20,5 @@ public interface ServiceLayerInterface {
             ItemPersistenceException;
 
     List<Item> updateAllItems() throws ItemPersistenceException;
-  
-    
-    
+
 }

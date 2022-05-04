@@ -9,7 +9,7 @@ package dao;
  * @author slalo
  */
 public interface ItemAuditDao {
-   
+
     public void writeAuditEntry(String entry) throws ItemPersistenceException;
-   
+
 }

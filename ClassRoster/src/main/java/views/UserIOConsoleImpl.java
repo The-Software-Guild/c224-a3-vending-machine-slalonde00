@@ -102,16 +102,16 @@ public class UserIOConsoleImpl implements UserIO {
 
     @Override
     public String returnString(String prompt) {
-         String nextline;
+        String nextline;
         nextline = sc.nextLine();
 
         return nextline;
-     }
+    }
 
     @Override
     public BigDecimal readBigDecimal(String prompt) {
-         return BigDecimal.valueOf(Double.parseDouble(prompt));
-     
+        return BigDecimal.valueOf(Double.parseDouble(prompt));
+
     }
 
 }

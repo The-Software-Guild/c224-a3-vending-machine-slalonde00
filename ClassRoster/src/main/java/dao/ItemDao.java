@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dto.Customer;
 import dto.Item;
 import java.io.FileNotFoundException;
 import java.util.Collection;
@@ -15,17 +16,21 @@ import java.util.Map;
  * @author slalo
  */
 public interface ItemDao {
-    
+
     Item editItem(Item someItem) throws ItemPersistenceException;
-    
-    List<Item> getAllItem()throws ItemPersistenceException;
-    
+
+    List<Item> getAllItem() throws ItemPersistenceException;
+
     Item findItem(int adress) throws ItemPersistenceException;
-    
-    void loadItem() throws ItemPersistenceException, FileNotFoundException;
-    
+
+    List<Item> loadItem() throws ItemPersistenceException, FileNotFoundException;
+
     public List<Item> updateAllItem() throws ItemPersistenceException;
-    
-    
-   
+
+    public Customer getCustomer();
+
+    public Customer editCustomer(int amountCoin, int indexItem);
+
+    public int findAndReturnItemId(int address);
+
 }

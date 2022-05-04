@@ -5,6 +5,7 @@
 package views;
 
 import dao.ItemPersistenceException;
+import dto.Customer;
 import dto.Item;
 import java.math.BigDecimal;
 import java.util.List;
@@ -30,17 +31,18 @@ public class ClassRosterView {
         io.print("1. List all item");
         io.print("2. List a item info");
         io.print("3. Exit");
+
         return io.readInt("Please Select one of the above option", 0, 3);
     }
 
     public String editItemMenu() {
         io.print("Buy an item");
-        
+
         return io.readString("Please enter the # of the item you wish to buy");
     }
 
     public Item editItem(Item someItem) {
-        
+
         String id = io.readString("How many do you wanna Buy ?");
         if (!id.equals("")) {
             someItem.setInStock((someItem.getInStock()) - Integer.parseInt(id));
@@ -49,16 +51,26 @@ public class ClassRosterView {
         return someItem;
     }
 
+    public int getFund() throws ItemPersistenceException {
+        int fund = io.readInt("How much dollars do you got ?");
+        if (fund < 0) {
+            io.print("You don't have enough money to buy anything");
+        } else {
+            io.print("Good ! you have " + fund + " token");
+        }
+        return fund;
+    }
+
     public void listItem(Item someItem) {
-       String itemInfo = "Name : ";
-             itemInfo+=someItem.getName()+"\n";
-             itemInfo+="Price : ";
-             itemInfo+=someItem.getPrice() +"\n";
-             itemInfo+= "In Stock : ";
-             itemInfo+= someItem.getInStock() + "\n";
-             itemInfo+= "Item id : ";
-             itemInfo+= someItem.getId()+ "\n";
-            io.print(itemInfo);
+        String itemInfo = "Name : ";
+        itemInfo += someItem.getName() + "\n";
+        itemInfo += "Price : ";
+        itemInfo += someItem.getPrice() + "\n";
+        itemInfo += "In Stock : ";
+        itemInfo += someItem.getInStock() + "\n";
+        itemInfo += "Item id : ";
+        itemInfo += someItem.getId() + "\n";
+        io.print(itemInfo);
     }
 
     public void listAllItem(List<Item> someItem) {
@@ -82,7 +94,7 @@ public class ClassRosterView {
 
     public Item getNewItemInfo() throws ItemPersistenceException {
         String Name = io.readString("Please enter Item Name");
-        BigDecimal Price = io.readBigDecimal("Please enter Item Price");
+        Double Price = io.readDouble("Please enter Item Price");
         int InStock = io.readInt("Please enter Item InStock");
 
         Item currentItem = new Item(Name);
@@ -104,20 +116,19 @@ public class ClassRosterView {
                     currentItem.getInStock());
             io.print(itemInfo);
         }
-       }
-    
-    
+    }
+
     public void displayItemListMenu(List<Item> itemList) {
-       
-        for (int i =0; i<itemList.size(); i++) {
+
+        for (int i = 0; i < itemList.size(); i++) {
             String itemInfo = "Item " + i + "\n" + "Name : ";
-             itemInfo+=itemList.get(i).getName()+"\n";
-             itemInfo+="Price : ";
-             itemInfo+=itemList.get(i).getPrice() +"\n";
-             itemInfo+= "In Stock : ";
-             itemInfo+= itemList.get(i).getInStock() + "\n";
-             itemInfo+= "Item id : ";
-             itemInfo+= itemList.get(i).getId()+ "\n";
+            itemInfo += itemList.get(i).getName() + "\n";
+            itemInfo += "Price : ";
+            itemInfo += itemList.get(i).getPrice() + "\n";
+            itemInfo += "In Stock : ";
+            itemInfo += itemList.get(i).getInStock() + "\n";
+            itemInfo += "Item id : ";
+            itemInfo += itemList.get(i).getId() + "\n";
             io.print(itemInfo);
         }
 
