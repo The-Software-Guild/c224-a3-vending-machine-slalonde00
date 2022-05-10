@@ -33,23 +33,25 @@ public class ItemDaoFileImpl implements ItemDao {
         this.itemFile = itemFile;
     }
 
-    @Override
-    public Item editItem(Item editedItem) throws ItemPersistenceException {
+    public List<Item> addItem(Item newItem) {
+        someItem.add(newItem);
+        return someItem;
+    }
 
-        someItem.remove(editedItem);
-        someItem.add(editedItem);
+    @Override
+    public Item editItem(Item editedItem, int howMany) throws ItemPersistenceException {
+        editedItem.setInStock(editedItem.getInStock() - howMany);
         writeItem();
         return editedItem;
     }
 
     @Override
-    public Customer editCustomer(int amountCoin, int indexItem) {
-        token.setNumberCoin(amountCoin);
-        token.getTotal();
-        double money = token.getTotal();
-        double total = (money - someItem.get(indexItem).getPrice());
-        token.setTotal(total);
-        return token;
+    public Customer editCustomer(Customer customer, Item boughtItem) {
+       
+        double money = customer.getTotal();
+        double total = (money - boughtItem.getPrice());
+        customer.setTotal(total);
+        return customer;
     }
 
     @Override
@@ -79,9 +81,7 @@ public class ItemDaoFileImpl implements ItemDao {
 
     @Override
     public Item findItem(int address) throws ItemPersistenceException {
-        for (int i = 0; i < someItem.size(); i++) {
-            someItem.get(i).setId(i);
-        }
+        System.out.println(someItem.get(address));
         return someItem.get(address);
     }
 

@@ -14,19 +14,7 @@ public class Customer {
     }
 
     private enum token {
-        DOLLARS, PENNIES, QUARTER;
-
-        public double getDollarsValue() {
-            return 1;
-        }
-
-        public double getPenniesValue() {
-            return 0.01;
-        }
-
-        public double getQuarterValue() {
-            return 0.25;
-        }
+        TOKEN;
 
     }
 
@@ -42,19 +30,22 @@ public class Customer {
         this.numberCoin = numberCoin;
     }
 
-    public double getTotal() {
-        this.total = ((token.DOLLARS.getDollarsValue() * getNumberCoin()) + (token.PENNIES.getPenniesValue() * getNumberCoin()) + (token.QUARTER.getQuarterValue() * getNumberCoin()));;
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(double total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 
-    public Customer(int numberCoin) {
+    public Customer(int numberCoin, double total) {
         this.numberCoin = numberCoin;
-        this.total = this.getTotal();
+        this.total = total;
 
     }
 
+    public Customer(double total){
+        this.total=total;
+    }
+    
 }

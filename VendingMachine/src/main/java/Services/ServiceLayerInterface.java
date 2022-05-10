@@ -6,6 +6,7 @@ package Services;
 
 import dto.Item;
 import dao.ItemPersistenceException;
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -19,6 +20,8 @@ public interface ServiceLayerInterface {
     Item getItem(int itemId) throws
             ItemPersistenceException;
 
+    public Item editItem(Item someItem, int id, int itemIndex) throws ItemPersistenceException, FileNotFoundException;
+    
     List<Item> updateAllItems() throws ItemPersistenceException;
 
 }

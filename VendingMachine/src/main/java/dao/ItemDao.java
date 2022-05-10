@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public interface ItemDao {
 
-    Item editItem(Item someItem) throws ItemPersistenceException;
+    public Item editItem(Item editedItem, int howMany) throws ItemPersistenceException;
 
     List<Item> getAllItem() throws ItemPersistenceException;
 
@@ -29,8 +29,10 @@ public interface ItemDao {
 
     public Customer getCustomer();
 
-    public Customer editCustomer(int amountCoin, int indexItem);
+    public Customer editCustomer(Customer customer, Item boughtItem);
 
     public int findAndReturnItemId(int address);
+    
+    public List<Item> addItem(Item newItem);
 
 }

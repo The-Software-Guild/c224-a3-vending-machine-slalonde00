@@ -14,11 +14,11 @@ import java.util.List;
  *
  * @author slalo
  */
-public class ClassRosterView {
+public class ItemView {
 
     private final UserIO io;
 
-    public ClassRosterView(UserIO io) {
+    public ItemView(UserIO io) {
         this.io = io;
     }
 
@@ -35,19 +35,21 @@ public class ClassRosterView {
         return io.readInt("Please Select one of the above option", 0, 3);
     }
 
-    public String editItemMenu() {
+    public int editItemSelectedMenu() throws ItemPersistenceException {
         io.print("Buy an item");
-
-        return io.readString("Please enter the # of the item you wish to buy");
+       int selectedItemIndex = io.readInt("Please enter the # of the item you wish to buy");
+        System.out.println(selectedItemIndex);
+        return selectedItemIndex;
     }
 
-    public Item editItem(Item someItem) {
+    public int editItemMenuHowMany() throws ItemPersistenceException {
+        int id = io.readInt("How many do you wanna Buy ?");
+        return id;
+    }
 
-        String id = io.readString("How many do you wanna Buy ?");
-        if (!id.equals("")) {
-            someItem.setInStock((someItem.getInStock()) - Integer.parseInt(id));
-        }
+    public List<Item> addItem(List<Item> someItem, Item newItem) {
 
+        someItem.add(newItem);
         return someItem;
     }
 
