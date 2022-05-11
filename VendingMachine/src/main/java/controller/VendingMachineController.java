@@ -105,11 +105,12 @@ public class VendingMachineController {
     public void editItem() throws ItemPersistenceException, FileNotFoundException {
         
         int fund = view.getFund();
+        customer.setNumberCoin(fund);
         int selectedItem = view.editItemSelectedMenu();
         Item itemToEdit = services.getItem((selectedItem));
         System.out.println(itemToEdit);
         int howMany = (view.editItemMenuHowMany());
-        services.editItem(itemToEdit, selectedItem, howMany);     
+        services.editItem(itemToEdit, selectedItem, howMany);   
         services.editCustomer(customer, selectedItem);
         view.listItem(itemToEdit);
     }

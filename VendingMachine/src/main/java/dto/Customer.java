@@ -4,6 +4,8 @@
  */
 package dto;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author slalo
@@ -13,9 +15,21 @@ public class Customer {
     public Customer() {
     }
 
-    private enum token {
-        TOKEN;
+    public enum Coin {
+        TOKEN(new BigDecimal("1"));
+        public final BigDecimal label;
 
+        public static Coin getTOKEN() {
+            return TOKEN;
+        }
+
+        public BigDecimal getLabel() {
+            return label;
+        }
+
+        Coin(BigDecimal label) {
+            this.label = label;
+        }
     }
 
     private int numberCoin = 0;
@@ -44,8 +58,8 @@ public class Customer {
 
     }
 
-    public Customer(double total){
-        this.total=total;
+    public Customer(double total) {
+        this.total = total;
     }
-    
+
 }
