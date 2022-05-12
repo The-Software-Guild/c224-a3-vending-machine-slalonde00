@@ -38,7 +38,6 @@ public class ItemView {
     public int editItemSelectedMenu() throws ItemPersistenceException {
         io.print("Buy an item");
        int selectedItemIndex = io.readInt("Please enter the # of the item you wish to buy");
-        System.out.println(selectedItemIndex);
         return selectedItemIndex;
     }
 

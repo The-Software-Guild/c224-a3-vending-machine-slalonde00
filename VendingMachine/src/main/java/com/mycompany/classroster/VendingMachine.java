@@ -16,6 +16,8 @@ import views.UserIOConsoleImpl;
 import dao.ItemAuditDao;
 import dao.ItemDao;
 import dto.Customer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  *
@@ -24,6 +26,12 @@ import dto.Customer;
 public class VendingMachine {
 
     public static void main(String[] args) throws ItemPersistenceException, FileNotFoundException {
+
+        ApplicationContext appContext
+                = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
+
+        VendingMachineController controller = appContext.getBean("controller", VendingMachineController.class);
+
         // Instantiate the UserIO implementation
         UserIO myIo = new UserIOConsoleImpl();
         // Instantiate the View and wire the UserIO implementation into it
@@ -35,8 +43,8 @@ public class VendingMachine {
         // Instantiate the Service Layer and wire the DAO and Audit DAO into it
         ServiceLayer myService = new ServiceLayer(myDao, myAuditDao);
         // Instantiate the Controller and wire the Service Layer into it
-        Customer customer = new Customer(100, 100);
-        VendingMachineController controller = new VendingMachineController(myView, myService, customer);
+        Customer customer = new Customer(100.00);
+        //    VendingMachineController controller = new VendingMachineController(myView, myService, customer);
         // Kick off the Controller
         controller.run();
     }

@@ -23,7 +23,7 @@ public class ItemDaoFileImpl implements ItemDao {
     private final String itemFile;
     public static final String delemiter = "::";
     private List<Item> someItem = new ArrayList<Item>();
-    private Customer token = new Customer();
+    private Customer token = new Customer(100.00);
 
     public ItemDaoFileImpl() {
         itemFile = "items.txt";
@@ -46,12 +46,11 @@ public class ItemDaoFileImpl implements ItemDao {
     }
 
     @Override
-    public Customer editCustomer(Customer customer, Item boughtItem) {
-       
-        double money = customer.getTotal();
+    public Customer editCustomer(Item boughtItem) {
+        double money = token.getTotal();
         double total = (money - boughtItem.getPrice());
-        customer.setTotal(total);
-        return customer;
+        token.setTotal(total);
+        return token;
     }
 
     @Override
@@ -81,7 +80,7 @@ public class ItemDaoFileImpl implements ItemDao {
 
     @Override
     public Item findItem(int address) throws ItemPersistenceException {
-        System.out.println(someItem.get(address));
+
         return someItem.get(address);
     }
 

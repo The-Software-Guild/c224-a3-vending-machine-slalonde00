@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+                http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="io" class="views.UserIOConsoleImpl" />
+
+    <bean id="dao" class="dao.ItemDaoFileImpl" />
+
+    <bean id="view" class="views.ItemView">
+        <constructor-arg ref="io" />
+    </bean>
+
+    <bean id="service" class="Services.ServiceLayer">
+        <constructor-arg ref="dao" />
+    </bean>
+    
+    <bean id="customer" class="dto.Customer">
+    </bean>
+    
+
+    <bean id="controller" class="controller.VendingMachineController">
+        <constructor-arg ref="service" />
+        <constructor-arg ref="view" />
+        <constructor-arg ref="customer" />
+    </bean>
+    
+
+</beans>

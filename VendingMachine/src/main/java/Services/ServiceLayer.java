@@ -62,8 +62,8 @@ public class ServiceLayer implements ServiceLayerInterface {
         return dao.getCustomer();
     }
 
-    public Customer editCustomer(Customer customer ,int itemId) throws ItemPersistenceException {
-        return dao.editCustomer(customer, dao.findItem(itemId));
+    public Customer editCustomer(Customer customer, int itemId) throws ItemPersistenceException {
+        return dao.editCustomer(dao.findItem(itemId));
     }
 
     @Override

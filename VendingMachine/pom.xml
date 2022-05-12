@@ -21,7 +21,13 @@
                         <artifactId>junit-platform-surefire-provider</artifactId>
                         <version>1.1.0</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>spring-context</artifactId>
+                        <version>5.2.2.RELEASE</version>
+                    </dependency>
                 </dependencies>
+
             </plugin>
         </plugins>
     </build> 
@@ -43,6 +49,12 @@
             <artifactId>junit-jupiter-engine</artifactId>
             <version>5.6.0</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>5.2.2.RELEASE</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
 </project>

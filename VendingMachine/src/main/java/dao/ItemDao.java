@@ -29,7 +29,7 @@ public interface ItemDao {
 
     public Customer getCustomer();
 
-    public Customer editCustomer(Customer customer, Item boughtItem);
+    public Customer editCustomer(Item boughtItem);
 
     public int findAndReturnItemId(int address);
     
