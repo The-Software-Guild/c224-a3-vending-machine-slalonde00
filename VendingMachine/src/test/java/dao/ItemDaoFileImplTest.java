@@ -80,7 +80,7 @@ public class ItemDaoFileImplTest {
         Customer oldCustomer = new Customer(amountCoin);
         Double expResult = editedCustomer.getTotal();
         System.out.println(oldCustomer.getTotal());
-        Double result = instance.editCustomer(oldCustomer, boughtItem).getTotal();
+        Double result = instance.editCustomer(boughtItem).getTotal();
         System.out.println(oldCustomer.getTotal());
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
