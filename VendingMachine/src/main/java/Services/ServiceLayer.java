@@ -22,12 +22,11 @@ import java.util.logging.Logger;
 public class ServiceLayer implements ServiceLayerInterface {
 
     private ItemAuditDao auditDao;
-
     ItemDao dao;
 
-    public ServiceLayer(ItemDao dao) {
+    /*public ServiceLayer(ItemDao dao) {
         this.dao = dao;
-    }
+    }*/
 
     public ServiceLayer(ItemDao dao, ItemAuditDao auditDao) {
         this.dao = dao;
@@ -70,9 +69,11 @@ public class ServiceLayer implements ServiceLayerInterface {
     public Item editItem(Item someItem, int itemIndex, int howMany) throws ItemPersistenceException, FileNotFoundException {
         Item itemToFind = dao.findItem(itemIndex);
         dao.editItem(itemToFind, howMany);
-
+        auditDao.writeAuditEntry(someItem.getName());
         return someItem;
     }
+    
+    
 
     private void validateItemData(Item item) throws
             ItemDataValidationException {

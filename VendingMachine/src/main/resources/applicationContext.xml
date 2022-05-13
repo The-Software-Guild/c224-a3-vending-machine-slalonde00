@@ -15,7 +15,12 @@
 
     <bean id="service" class="Services.ServiceLayer">
         <constructor-arg ref="dao" />
+         <constructor-arg ref="auditdao" />
     </bean>
+    
+    <bean id="auditdao" class="dao.ItemAuditDaoFileImpl">
+    </bean>
+    
     
     <bean id="customer" class="dto.Customer">
     </bean>

@@ -8,15 +8,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author slalo
  */
+@Component
 public class ItemAuditDaoFileImpl implements ItemAuditDao {
 
     public static final String AUDIT_FILE = "audit.txt";
 
+   
     @Override
     public void writeAuditEntry(String entry) throws ItemPersistenceException {
         PrintWriter out;
